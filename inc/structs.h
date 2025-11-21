@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/10/18 05:35:21 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/11/21 23:06:34 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ typedef struct s_mlx
 }					t_mlx;
 
 /**
- * t_vec - 3D vector/point structure for geometric calculations
+ * t_vec3 - 3D vector/point structure for geometric calculations
  *
  * @x: X-axis component
  * @y: Y-axis component (vertical in world space)
  * @z: Z-axis component (depth)
  */
-typedef struct s_vec
+typedef struct s_vec3
 {
 	double			x;
 	double			y;
 	double			z;
-}					t_vec;
+}					t_vec3;
 
-typedef t_vec		t_pos;
-typedef t_vec		t_dir;
+typedef t_vec3		t_pos;
+typedef t_vec3		t_dir;
 
 /**
  * t_color - RGB color structure for final pixel values
@@ -152,7 +152,7 @@ typedef struct s_sphere
 typedef struct s_plan
 {
 	t_pos			point;
-	t_vec			normal;
+	t_vec3			normal;
 	t_color			color;
 }					t_plan;
 
@@ -168,7 +168,7 @@ typedef struct s_plan
 typedef struct s_cylinder
 {
 	t_pos			center;
-	t_vec			axis;
+	t_vec3			axis;
 	double			diameter;
 	double			height;
 	t_color			color;
