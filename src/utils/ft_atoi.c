@@ -1,38 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_color.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:53:38 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:07:30 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /**
- * parse_color - Parse RGB color from string "R,G,B"
+ * atoi - Convert string to integer
+ *
+ * @str: String to convert
+ *
+ * Return: Integer value
  */
-t_parse_status	parse_color(char *str, t_color *color)
+int	ft_atoi(const char *str)
 {
-	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
+	int	result;
+	int	sign;
+	int	i;
 
-	rgb = ft_split(str, ",");
-	if (!rgb || count_split(rgb) != 3)
-		return (free_split(rgb), PARSE_ERROR);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	free_split(rgb);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (PARSE_ERROR);
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	return (PARSE_SUCCESS);
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	if (str[i] != 0)
+		return (-1);
+	return (result * sign);
 }
