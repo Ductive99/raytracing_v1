@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 21:25:49 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:18:06 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ typedef struct s_img
  * @mlx_ptr: MLX instance pointer returned by mlx_init()
  * @win_ptr: Window pointer returned by mlx_new_window()
  * @img: Image buffer structure for rendering
+ * @scene: Pointer to the scene (for cleanup in hooks)
  */
 typedef struct s_mlx
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
 	t_img				img;
+	void				*scene;
 }						t_mlx;
 
 /**
