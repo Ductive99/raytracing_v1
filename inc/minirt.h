@@ -6,13 +6,14 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 18:05:28 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/14 16:12:28 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "../minilibx-linux/mlx.h"
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
@@ -20,6 +21,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+// Window constants
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define WIN_TITLE "miniRT"
+
+// Key codes for Linux
+# define KEY_ESC 65307
 
 // Parsing
 
@@ -57,5 +66,26 @@ int				ft_atoi(const char *str);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstclear(t_list **lst, void (*del)(void *));
+
+// MLX functions
+
+int				init_mlx(t_mlx *mlx);
+void			cleanup_mlx(t_mlx *mlx);
+void			cleanup_scene(t_scene *scene);
+int				handle_keypress(int keycode, t_mlx *mlx);
+int				handle_close(t_mlx *mlx);
+void			put_pixel(t_img *img, int x, int y, int color);
+int				rgb_to_int(int r, int g, int b);
+void			render_test_pattern(t_mlx *mlx, t_scene *scene);
+
+// Vector math functions
+
+t_vec3			vec_add(t_vec3 a, t_vec3 b);
+t_vec3			vec_sub(t_vec3 a, t_vec3 b);
+t_vec3			vec_scale(t_vec3 v, double scalar);
+double			vec_dot(t_vec3 a, t_vec3 b);
+double			vec_length(t_vec3 v);
+t_vec3			vec_normalize(t_vec3 v);
+t_vec3			vec_cross(t_vec3 a, t_vec3 b);
 
 #endif /* MINIRT_H */

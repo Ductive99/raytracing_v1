@@ -5,15 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 18:12:05 by abendrih         ###   ########.fr       */
+/*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
+/*   Updated: 2025/12/14 18:18:06 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
 
-void	init_scene(t_scene *scene)
+/**
+ * init_scene - Initialize scene with default values
+ * @scene: Pointer to scene structure
+ */
+static void	init_scene(t_scene *scene)
 {
 	scene->ambient.ratio = -1.0;
 	scene->camera.fov = 0.0;
@@ -23,27 +26,38 @@ void	init_scene(t_scene *scene)
 	scene->cylinders = NULL;
 }
 
-void	print_scene(t_scene *scene)
+/**
+ * setup_hooks - Setup all MLX event hooks
+ * @mlx: Pointer to MLX structure
+ *
+ * This function registers:
+ * - Key press events (for ESC key)
+ * - Window close event (red X button)
+ */
+static void	setup_hooks(t_mlx *mlx)
 {
-	printf("\n=== SCENE PARSED ===\n");
-	printf("Ambient: ratio=%.2f, color=(%d,%d,%d)\n", scene->ambient.ratio,
-		scene->ambient.color.r, scene->ambient.color.g, scene->ambient.color.b);
-	printf("Camera: pos=(%.1f,%.1f,%.1f), fov=%.1f\n", scene->camera.pos.x,
-		scene->camera.pos.y, scene->camera.pos.z, scene->camera.fov);
-	printf("===================\n\n");
+	mlx_hook(mlx->win_ptr, 2, 1L << 0, handle_keypress, mlx);
+	mlx_hook(mlx->win_ptr, 17, 0, handle_close, mlx);
 }
 
-void	cleanup_scene(t_scene *scene)
-{
-	ft_lstclear(&scene->lights, free);
-	ft_lstclear(&scene->spheres, free);
-	ft_lstclear(&scene->planes, free);
-	ft_lstclear(&scene->cylinders, free);
-}
-
+/**
+ * main - Entry point of the program
+ * @argc: Number of arguments
+ * @argv: Array of arguments
+ *
+ * Process:
+ * 1. Parse the scene file
+ * 2. Initialize MLX (window and image buffer)
+ * 3. Setup event hooks
+ * 4. Enter MLX event loop
+ * 5. Cleanup on exit
+ *
+ * Return: 0 on success, 1 on error
+ */
 int	main(int argc, char **argv)
 {
-	t_scene	scene = {0};
+	t_scene	scene;
+	t_mlx	mlx;
 
 	if (argc != 2)
 	{
@@ -56,8 +70,16 @@ int	main(int argc, char **argv)
 		printf("Error: Failed to parse scene\n");
 		return (1);
 	}
-	print_scene(&scene);
-	printf("✅ Parsing successful!\n");
+	if (init_mlx(&mlx) != 0)
+	{
+		cleanup_scene(&scene);
+		return (1);
+	}
+	mlx.scene = &scene;
+	render_test_pattern(&mlx, &scene);
+	setup_hooks(&mlx);
+	mlx_loop(mlx.mlx_ptr);
+	cleanup_mlx(&mlx);
 	cleanup_scene(&scene);
 	return (0);
 }
