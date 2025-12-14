@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#              #
-#    Updated: 2025/12/14 19:21:25 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/14 19:48:08 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ OBJS = $(SRCS:.c=.o)
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR) -I$(MINILIBX_DIR)
+CFLAGS = -Wall -Wextra -Werror -g3 -I$(INC_DIR) -I$(MINILIBX_DIR)
 LDFLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
 
 # Colors for output

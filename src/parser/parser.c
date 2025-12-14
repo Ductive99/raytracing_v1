@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 02:21:20 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 21:32:22 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/14 19:53:11 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_scene(char *filename, t_scene *scene)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (perror("Failed to open file"), 0);
+		return (perror("Failed to open file"), PARSE_ERROR);
 	while (1)
 	{
 		line = get_next_line(fd);
