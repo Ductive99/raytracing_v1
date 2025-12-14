@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:53:56 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 15:37:14 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:50:12 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "structs.h"
 # include <stdio.h>
 # include <math.h>
+
+# define EPSILON 0.001
 
 t_vec3	vec_add(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_sub(t_vec3 v1, t_vec3 v2);
