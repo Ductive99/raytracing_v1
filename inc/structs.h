@@ -6,12 +6,14 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/11/21 23:06:34 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:44:35 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include <stdbool.h>
 
 /**
  * t_img - Image buffer structure for pixel manipulation
@@ -59,8 +61,46 @@ typedef struct s_vec3
 	double			z;
 }					t_vec3;
 
-typedef t_vec3		t_pos;
+typedef t_vec3		t_point;
 typedef t_vec3		t_dir;
+
+/**
+ * t_ray - Ray structure for ray tracing
+ * 
+ * @origin: Startin point of the ray
+ * @direction: Normalized direction vector of the ray
+ */
+typedef struct s_ray
+{
+	t_point	origin;
+	t_dir	direction;
+}	t_ray;
+
+/**
+ * t_hit - Hit record for ray-object intersections
+ *
+ * @hit: Whether an intersection occurred
+ * @t: Distance along the ray to the hit point
+ * @point: 3D coordinates of the intersection point
+ * @normal: Surface normal at the hit point (normalized, pointing outward)
+ * @color: Color of the object at the hit point
+ */
+typedef struct s_hit
+{
+	bool			hit;
+	double			t;
+	t_point			point;
+	t_vec3			normal;
+	t_color			color;
+}					t_hit;
+
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+}	t_quadratic;
 
 /**
  * t_color - RGB color structure for final pixel values
@@ -109,7 +149,7 @@ typedef struct s_ambient
  */
 typedef struct s_light
 {
-	t_pos			pos;
+	t_point			pos;
 	double			ratio;
 	t_color			color;
 }					t_light;
@@ -123,7 +163,7 @@ typedef struct s_light
  */
 typedef struct s_cam
 {
-	t_pos			pos;
+	t_point			pos;
 	t_dir			dir;
 	double			fov;
 }					t_cam;
@@ -137,7 +177,7 @@ typedef struct s_cam
  */
 typedef struct s_sphere
 {
-	t_pos			center;
+	t_point			center;
 	double			diameter;
 	t_color			color;
 }					t_sphere;
@@ -151,7 +191,7 @@ typedef struct s_sphere
  */
 typedef struct s_plan
 {
-	t_pos			point;
+	t_point			point;
 	t_vec3			normal;
 	t_color			color;
 }					t_plan;
@@ -167,7 +207,7 @@ typedef struct s_plan
  */
 typedef struct s_cylinder
 {
-	t_pos			center;
+	t_point			center;
 	t_vec3			axis;
 	double			diameter;
 	double			height;
