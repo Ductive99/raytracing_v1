@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 03:06:36 by esouhail          #+#    #+#             */
-/*   Updated: 2025/10/16 03:40:06 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/12 01:11:02 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ static int	count_words(char const *s, const char *charset)
 	return (count);
 }
 
-static void	free_split(char **arr, int n)
-{
-	while (n--)
-		free(arr[n]);
-	free(arr);
-}
-
 static char	**fill_arr(char **arr, const char *s, const char *charset)
 {
 	int		j;
@@ -63,7 +56,10 @@ static char	**fill_arr(char **arr, const char *s, const char *charset)
 			i++;
 		word = malloc(i - start + 1);
 		if (!word)
-			return (free_split(arr, j), NULL);
+		{
+			arr[j] = NULL;
+			return (free_split(arr), NULL);
+		}
 		ft_memcpy(word, &s[start], i - start);
 		word[i - start] = '\0';
 		arr[j++] = word;

@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_color.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:53:38 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/12 00:56:05 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /**
- * parse_color - Parse RGB color from string "R,G,B"
+ * ft_strncmp - Compare two strings up to n characters
+ *
+ * @s1: First string
+ * @s2: Second string
+ * @n: Maximum number of characters to compare
+ *
+ * Return: 0 if equal, negative if s1 < s2, positive if s1 > s2
  */
-t_parse_status	parse_color(char *str, t_color *color)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
+	size_t	i;
 
-	rgb = ft_split(str, ",");
-	if (!rgb || count_split(rgb) != 3)
-		return (free_split(rgb), PARSE_ERROR);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	free_split(rgb);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (PARSE_ERROR);
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	return (PARSE_SUCCESS);
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

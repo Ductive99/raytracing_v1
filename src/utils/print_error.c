@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:37:46 by esouhail          #+#    #+#             */
-/*   Updated: 2025/10/16 03:36:53 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/12 00:56:05 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@
  *
  * Return: 1 always
  */
-int	print_err(char *msg, int format)
+int	print_err(char *msg)
 {
-	if (format)
-		write(2, "Error: ", 7);
+	write(2, "Error: ", 7);
 	write(2, msg, ft_strlen(msg));
-	if (format)
-		write(2, "\n", 1);
+	write(2, "\n", 1);
 	return (1);
 }

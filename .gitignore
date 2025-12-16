@@ -1,0 +1,21 @@
+# Object files
+*.o
+*.a
+
+# Executables
+miniRT
+
+# MiniLibX compiled files
+minilibx-linux/*.o
+minilibx-linux/libmlx.a
+minilibx-linux/test/mlx-test
+
+# Editor/IDE files
+.vscode/
+.DS_Store
+*~
+*.swp
+
+# Debug files
+*.dSYM/
+vgcore.*
