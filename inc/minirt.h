@@ -6,15 +6,16 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 12:29:17 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 14:48:35 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "lib/minilibx-linux/mlx.h"
+# include "../lib/minilibx-linux/mlx.h"
 # include "structs.h"
+# include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stddef.h>
@@ -31,7 +32,6 @@
 # define KEY_ESC 65307
 
 // Parsing
-
 int				parse_scene(char *filename, t_scene *scene);
 
 t_parse_status	parse_ambient(char **split, t_scene *scene);
@@ -78,14 +78,14 @@ void			put_pixel(t_img *img, int x, int y, int color);
 int				rgb_to_int(int r, int g, int b);
 void			render_test_pattern(t_mlx *mlx, t_scene *scene);
 
-// Vector math functions
+// // Vector math functions
 
-t_vec3			vec_add(t_vec3 a, t_vec3 b);
-t_vec3			vec_sub(t_vec3 a, t_vec3 b);
-t_vec3			vec_scale(t_vec3 v, double scalar);
-double			vec_dot(t_vec3 a, t_vec3 b);
-double			vec_length(t_vec3 v);
-t_vec3			vec_normalize(t_vec3 v);
-t_vec3			vec_cross(t_vec3 a, t_vec3 b);
+// t_vec3			vec_add(t_vec3 a, t_vec3 b);
+// t_vec3			vec_sub(t_vec3 a, t_vec3 b);
+// t_vec3			vec_scale(t_vec3 v, double scalar);
+// double			vec_dot(t_vec3 a, t_vec3 b);
+// double			vec_length(t_vec3 v);
+// t_vec3			vec_normalize(t_vec3 v);
+// t_vec3			vec_cross(t_vec3 a, t_vec3 b);
 
 #endif /* MINIRT_H */

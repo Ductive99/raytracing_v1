@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 12:37:41 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:29:25 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define STRUCTS_H
 
 # include <stdbool.h>
+# define WIDTH 1600
+# define HEIGHT 900
+
+typedef enum e_parse_status
+{
+	PARSE_SUCCESS = 0,
+	PARSE_ERROR = 1
+}				t_parse_status;
 
 /**
  * t_img - Image buffer structure for pixel manipulation
@@ -39,13 +47,15 @@ typedef struct s_img
  * @mlx_ptr: MLX instance pointer returned by mlx_init()
  * @win_ptr: Window pointer returned by mlx_new_window()
  * @img: Image buffer structure for rendering
+ * @scene: Pointer to the scene (for cleanup in hooks)
  */
 typedef struct s_mlx
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_img			img;
-}					t_mlx;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	void				*scene;
+}						t_mlx;
 
 /**
  * t_vec3 - 3D vector/point structure for geometric calculations
@@ -77,6 +87,20 @@ typedef struct s_ray
 }	t_ray;
 
 /**
+ * t_color - RGB color structure for final pixel values
+ *
+ * @r:   Red component (0 - 255)
+ * @g: Green component (0 - 255)
+ * @b:  Blue component (0 - 255)
+ */
+typedef struct s_color
+{
+	int				r;
+	int				g;
+	int				b;
+}					t_color;
+
+/**
  * t_hit - Hit record for ray-object intersections
  *
  * @hit: Whether an intersection occurred
@@ -101,20 +125,6 @@ typedef struct s_quadratic
 	double	c;
 	double	discriminant;
 }	t_quadratic;
-
-/**
- * t_color - RGB color structure for final pixel values
- *
- * @r:   Red component (0 - 255)
- * @g: Green component (0 - 255)
- * @b:  Blue component (0 - 255)
- */
-typedef struct s_color
-{
-	int				r;
-	int				g;
-	int				b;
-}					t_color;
 
 /**
  * t_list - Linked list
@@ -256,7 +266,7 @@ typedef struct s_object_parser
 {
 	const char	*id;
 	int			id_len;
-	void		(*parser_func)(char **, t_scene *);
+	t_parse_status		(*parser_func)(char **, t_scene *);
 }		t_object_parser;
 
 #endif /* STRUCTS_H */

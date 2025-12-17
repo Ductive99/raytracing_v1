@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_math.h                                      :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 18:53:56 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 14:49:24 by esouhail         ###   ########.fr       */
+/*   Created: 2025/12/17 16:27:27 by esouhail          #+#    #+#             */
+/*   Updated: 2025/12/17 16:30:32 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_MATH_H
-# define VECTOR_MATH_H
+#ifndef RENDER_H
+# define RENDER_H
 
 # include "structs.h"
-# include <stdio.h>
-# include <math.h>
 
-# define EPSILON 0.001
+void	setup_camera(t_cam *cam, int width, int height);
+t_ray	get_camera_ray(t_cam *cam, int x, int y);
+void	render_scene(t_scene *scene, t_mlx *mlx);
 
-t_vec3	vec_add(t_vec3 v1, t_vec3 v2);
-t_vec3	vec_sub(t_vec3 v1, t_vec3 v2);
-t_vec3	vec_scale(double scale, t_vec3 v);
-t_vec3	vec_normalize(t_vec3 v);
-double	vec_len(t_vec3 v);
-
-double	vec_dot(t_vec3 v1, t_vec3 v2);
-t_vec3	vec_cross(t_vec3 a, t_vec3 b);
-
-#endif /* VECTOR_MATH_H */
+#endif /* CAMERA_H */

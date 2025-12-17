@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/14 19:47:12 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:38:48 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ray.h"
+#include "render.h"
 
 /**
  * init_scene - Initialize scene with default values
@@ -76,7 +78,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	mlx.scene = &scene;
-	render_test_pattern(&mlx, &scene);
+	render_scene(&scene, &mlx);
 	setup_hooks(&mlx);
 	mlx_loop(mlx.mlx_ptr);
 	cleanup_mlx(&mlx);
