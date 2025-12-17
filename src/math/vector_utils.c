@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "structs.h"
+#include "vector_math.h"
+#include <math.h>
+#include <stdio.h>
 
 t_vec3	vec_new(double x, double y, double z)
 {
