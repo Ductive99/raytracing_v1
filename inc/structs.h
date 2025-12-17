@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/14 15:44:35 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 11:41:05 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,26 @@ typedef struct s_light
 /**
  * t_cam - Camera configuration (identifier: C)
  *
- * @pos: x,y,z coordinates of the camera viewpoint
- * @dir: 3D normalized orientation vector [-1,1] for each axis
- * @fov: Horizontal field of view in degrees [0-180]
+ * @position: x,y,z coordinates of the camera viewpoint
+ * @dir: 3D normalized orientation vector for each axis
+ * @fov: field of view in degrees
+ * @viewport_u: viewport horizontal vector
+ * @viewport_v: viewport vertical vector
+ * @viewport_upper_left: upper-left corner
+ * @pixel_delta_u: horizontal pixel spacing
+ * @pixel_delta_v: vertical pixel spacing
  */
 typedef struct s_cam
 {
-	t_point			pos;
-	t_dir			dir;
-	double			fov;
-}					t_cam;
+	t_point	position;
+	t_vec3	dir;
+	double	fov;
+	t_vec3	viewport_u;
+	t_vec3	viewport_v;
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel_delta_u;
+	t_vec3	pixel_delta_v;
+}	t_cam;
 
 /**
  * t_sphere - Sphere object (identifier: sp)
