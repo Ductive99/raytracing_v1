@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 15:43:46 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 20:35:25 by abendrih         ###   ########.fr       */
+/*   Created: 2025/12/14 15:35:33 by esouhail          #+#    #+#             */
+/*   Updated: 2025/12/14 15:37:02 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "ray.h"
+#include "vector_math.h"
 
-int	ft_isspace(int c)
+t_vec3	ray_at(t_ray ray, double t)
 {
-	return ((c == ' ') || (c >= 9 && c <= 13));
-}
-
-int	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
+	return (vec_add(ray.origin, vec_scale(t, ray.direction)));
 }

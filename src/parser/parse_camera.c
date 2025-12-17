@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:37:07 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/17 14:49:08 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_parse_status	parse_camera(char **split, t_scene *scene)
 		return (print_err("Duplicate camera detected"), PARSE_ERROR);
 	if (count_split(split) != 4)
 		return (print_err("Invalid camera parameters"), PARSE_ERROR);
-	if (parse_vector(split[1], &scene->camera.pos) == PARSE_ERROR)
+	if (parse_vector(split[1], &scene->camera.position) == PARSE_ERROR)
 		return (print_err("Invalid camera position"), PARSE_ERROR);
 	if (parse_vector(split[2], &scene->camera.dir) == PARSE_ERROR)
 		return (print_err("Invalid camera direction"), PARSE_ERROR);
