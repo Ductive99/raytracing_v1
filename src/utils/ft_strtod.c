@@ -3,73 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 17:59:03 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/17 18:16:53 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double	parse_integer_part(const char **str)
-{
-	double	result;
+#include <stdio.h>
+#include <stdbool.h>
 
-	result = 0.0;
-	while (**str >= '0' && **str <= '9')
-	{
-		result = result * 10.0 + (**str - '0');
-		(*str)++;
-	}
-	return (result);
+inline bool	ft_isspace(int c)
+{
+	return ((c == ' ') || (c >= 9 && c <= 13));
 }
 
-static double	parse_fraction_part(const char **str)
+inline bool	ft_isdigit(int c)
 {
-	double	result;
-	double	divisor;
-
-	result = 0.0;
-	divisor = 10.0;
-	if (**str == '.')
-	{
-		(*str)++;
-		while (**str >= '0' && **str <= '9')
-		{
-			result += (**str - '0') / divisor;
-			divisor *= 10.0;
-			(*str)++;
-		}
-	}
-	return (result);
+	return ((c >= '0') && (c <= '9'));
 }
 
 /**
- * ft_strtod - Convert string to double
+ * ft_strtod - converts the initial portion of a string to double
  *
- * @str: String to convert
- * @endptr: Pointer to store the address of the first invalid character
+ * @nptr: String to be converted to double
+ * @endptr: If not NULL, stores the address of the first invalid character
  *
- * Return: Double value
+ * Parses the string nptr and converts it to a double value.
+ * Handles optional leading whitespace, optional sign (+/-),
+ * integer part, optional decimal point and fractional part.
+ *
+ * Format: [whitespace][+/-][digits][.digits]
+ *
+ * Return: The converted double value, or 0.0 if no valid conversion
+ *         could be performed. If endptr is not NULL, it points to the
+ *         first character after the number.
  */
-double	ft_strtod(const char *str, char **endptr)
+double	ft_strtod(const char *nptr, char **endptr)
 {
 	double	result;
-	int		sign;
+	double	fraction;
 
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
+	result = 1;
+	auto int sign = 1;
+	fraction = 1.0;
+	if (!nptr)
+		return (result);
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+		sign -= 2 * (*nptr++ == '-');
+	while (ft_isdigit(*nptr))
+		result = result * 10 + (*nptr++ - '0');
+	if (*nptr == '.')
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		while (ft_isdigit(*++nptr))
+		{
+			fraction *= 0.1;
+			result += (double)(*nptr - '0') *fraction;
+		}
 	}
-	result = parse_integer_part(&str);
-	result += parse_fraction_part(&str);
 	if (endptr)
-		*endptr = (char *)str;
+		*endptr = (char *)nptr;
 	return (result * sign);
 }
