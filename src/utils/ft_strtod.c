@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/17 18:16:53 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 19:25:28 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ double	ft_strtod(const char *nptr, char **endptr)
 	double	result;
 	double	fraction;
 
-	result = 1;
+	result = 0.0;
 	auto int sign = 1;
 	fraction = 1.0;
 	if (!nptr)
