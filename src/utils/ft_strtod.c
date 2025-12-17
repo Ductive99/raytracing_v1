@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/17 19:25:28 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/17 20:02:01 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-
-inline bool	ft_isspace(int c)
-{
-	return ((c == ' ') || (c >= 9 && c <= 13));
-}
-
-inline bool	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
-}
 
 /**
  * ft_strtod - converts the initial portion of a string to double

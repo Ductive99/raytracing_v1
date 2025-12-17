@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:43:46 by esouhail          #+#    #+#             */
-/*   Updated: 2025/10/14 12:35:54 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 20:35:25 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+int	ft_isspace(int c)
+{
+	return ((c == ' ') || (c >= 9 && c <= 13));
+}
+
 int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9');
+	return ((c >= '0') && (c <= '9'));
 }
