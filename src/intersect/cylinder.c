@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/17 00:00:00 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/17 23:04:58 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ static t_quadratic	get_cylinder_equation(t_ray ray, t_cylinder *cylinder)
 
 	oc = vec_sub(ray.origin, cylinder->center);
 	radius = cylinder->diameter / 2.0;
-	d_perp = vec_sub(ray.direction,
-			vec_scale(vec_dot(ray.direction, cylinder->axis), cylinder->axis));
-	oc_perp = vec_sub(oc, vec_scale(vec_dot(oc, cylinder->axis), cylinder->axis));
+	d_perp = vec_sub(ray.direction, vec_scale(vec_dot(ray.direction,
+					cylinder->axis), cylinder->axis));
+	oc_perp = vec_sub(oc, vec_scale(vec_dot(oc, cylinder->axis),
+				cylinder->axis));
 	q.a = vec_dot(d_perp, d_perp);
 	q.b = 2.0 * vec_dot(d_perp, oc_perp);
 	q.c = vec_dot(oc_perp, oc_perp) - radius * radius;
@@ -109,8 +110,8 @@ static t_vec3	get_cylinder_normal(t_vec3 hit_point, t_cylinder *cylinder)
 
 	center_to_hit = vec_sub(hit_point, cylinder->center);
 	projection = vec_dot(center_to_hit, cylinder->axis);
-	axis_point = vec_add(cylinder->center,
-			vec_scale(projection, cylinder->axis));
+	axis_point = vec_add(cylinder->center, vec_scale(projection,
+				cylinder->axis));
 	return (vec_normalize(vec_sub(hit_point, axis_point)));
 }
 
