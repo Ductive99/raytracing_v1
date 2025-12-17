@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 12:29:17 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 14:53:06 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "lib/minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
@@ -77,15 +77,5 @@ int				handle_close(t_mlx *mlx);
 void			put_pixel(t_img *img, int x, int y, int color);
 int				rgb_to_int(int r, int g, int b);
 void			render_test_pattern(t_mlx *mlx, t_scene *scene);
-
-// Vector math functions
-
-t_vec3			vec_add(t_vec3 a, t_vec3 b);
-t_vec3			vec_sub(t_vec3 a, t_vec3 b);
-t_vec3			vec_scale(t_vec3 v, double scalar);
-double			vec_dot(t_vec3 a, t_vec3 b);
-double			vec_length(t_vec3 v);
-t_vec3			vec_normalize(t_vec3 v);
-t_vec3			vec_cross(t_vec3 a, t_vec3 b);
 
 #endif /* MINIRT_H */

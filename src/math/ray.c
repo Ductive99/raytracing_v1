@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 12:02:31 by esouhail          #+#    #+#             */
+/*   Created: 2025/12/17 00:00:00 by abendrih          #+#    #+#             */
 /*   Updated: 2025/12/17 14:53:09 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "ray.h"
+#include "vector_math.h"
 
-# include "structs.h"
-# include <stdbool.h>
-
-bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
-bool	hit_plane(t_ray ray, t_plan *plane, t_hit *hit);
-t_vec3	ray_at(t_ray ray, double t);
-
-#endif /* RAY_H */
+/**
+ * ray_at - Get a point along a ray at distance t
+ * @ray: The ray
+ * @t: Distance along the ray
+ *
+ * Formula: point = origin + t * direction
+ *
+ * Return: The point at distance t along the ray
+ */
+t_vec3	ray_at(t_ray ray, double t)
+{
+	return (vec_add(ray.origin, vec_scale(t, ray.direction)));
+}

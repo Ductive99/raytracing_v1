@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#              #
-#    Updated: 2025/12/14 19:48:08 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/17 14:53:09 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ PARSER_DIR = $(SRC_DIR)/parser
 UTILS_DIR = $(SRC_DIR)/utils
 MLX_DIR = $(SRC_DIR)/mlx
 MATH_DIR = $(SRC_DIR)/math
+INTERSECT_DIR = $(SRC_DIR)/intersect
 MINILIBX_DIR = minilibx-linux
 
 # Source files
@@ -48,7 +49,12 @@ SRCS = $(SRC_DIR)/main.c \
        $(MLX_DIR)/hooks.c \
        $(MLX_DIR)/cleanup.c \
        $(MLX_DIR)/put_pixel.c \
-       $(MLX_DIR)/render.c
+       $(MLX_DIR)/render.c \
+       $(INTERSECT_DIR)/sphere.c \
+       $(INTERSECT_DIR)/plane.c \
+       $(MATH_DIR)/vector_ops.c \
+       $(MATH_DIR)/vector_utils.c \
+       $(MATH_DIR)/ray.c
 
 OBJS = $(SRCS:.c=.o)
 
