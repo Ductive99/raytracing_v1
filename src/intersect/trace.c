@@ -48,6 +48,23 @@ static void	check_planes(t_ray ray, t_scene *scene, t_hit *closest)
 	}
 }
 
+static void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest)
+{
+	t_list	*node;
+	t_hit	current;
+
+	node = scene->cylinders;
+	while (node)
+	{
+		if (hit_cylinder(ray, (t_cylinder *)node->obj, &current))
+		{
+			if (current.t > 0.001 && current.t < closest->t)
+				*closest = current;
+		}
+		node = node->next;
+	}
+}
+
 t_color	trace_ray(t_ray ray, t_scene *scene)
 {
 	t_hit	closest;
@@ -57,6 +74,7 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
 	closest.t = DBL_MAX;
 	check_spheres(ray, scene, &closest);
 	check_planes(ray, scene, &closest);
+	check_cylinders(ray, scene, &closest);
 	if (closest.hit)
 		return (closest.color);
 	background.r = 0;

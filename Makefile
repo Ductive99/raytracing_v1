@@ -33,6 +33,7 @@ SRC_FILES	= main.c \
 		math/vector_utils.c \
 		intersect/sphere.c \
 		intersect/plane.c \
+		intersect/cylinder.c \
 		intersect/trace.c \
 		render/camera.c \
 		render/render.c \
