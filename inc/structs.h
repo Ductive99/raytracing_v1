@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 16:29:25 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/17 21:04:28 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define STRUCTS_H
 
 # include <stdbool.h>
-# define WIDTH 1600
-# define HEIGHT 900
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef enum e_parse_status
 {
 	PARSE_SUCCESS = 0,
 	PARSE_ERROR = 1
-}				t_parse_status;
+}					t_parse_status;
 
 /**
  * t_img - Image buffer structure for pixel manipulation
@@ -51,11 +51,11 @@ typedef struct s_img
  */
 typedef struct s_mlx
 {
-	void				*mlx_ptr;
-	void				*win_ptr;
-	t_img				img;
-	void				*scene;
-}						t_mlx;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_img			img;
+	void			*scene;
+}					t_mlx;
 
 /**
  * t_vec3 - 3D vector/point structure for geometric calculations
@@ -76,15 +76,15 @@ typedef t_vec3		t_dir;
 
 /**
  * t_ray - Ray structure for ray tracing
- * 
+ *
  * @origin: Startin point of the ray
  * @direction: Normalized direction vector of the ray
  */
 typedef struct s_ray
 {
-	t_point	origin;
-	t_dir	direction;
-}	t_ray;
+	t_point			origin;
+	t_dir			direction;
+}					t_ray;
 
 /**
  * t_color - RGB color structure for final pixel values
@@ -120,15 +120,15 @@ typedef struct s_hit
 
 typedef struct s_quadratic
 {
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-}	t_quadratic;
+	double			a;
+	double			b;
+	double			c;
+	double			discriminant;
+}					t_quadratic;
 
 /**
  * t_list - Linked list
- * 
+ *
  * @obj: pointer to current node
  * @next: pointer to the next node
  */
@@ -178,15 +178,15 @@ typedef struct s_light
  */
 typedef struct s_cam
 {
-	t_point	position;
-	t_vec3	dir;
-	double	fov;
-	t_vec3	viewport_u;
-	t_vec3	viewport_v;
-	t_vec3	viewport_upper_left;
-	t_vec3	pixel_delta_u;
-	t_vec3	pixel_delta_v;
-}	t_cam;
+	t_point			position;
+	t_vec3			dir;
+	double			fov;
+	t_vec3			viewport_u;
+	t_vec3			viewport_v;
+	t_vec3			viewport_upper_left;
+	t_vec3			pixel_delta_u;
+	t_vec3			pixel_delta_v;
+}					t_cam;
 
 /**
  * t_sphere - Sphere object (identifier: sp)
@@ -236,7 +236,7 @@ typedef struct s_cylinder
 
 /**
  * t_scene - Complete scene structure containing all rendering elements
- * 
+ *
  * @ambient: Ambient lighting
  * @camera: Camera viewpoint and configuration
  * @lights: Linked list of point light sources in the scene
@@ -256,17 +256,17 @@ typedef struct s_scene
 
 /**
  * t_object_parser - Object parsing structure
- * 
+ *
  * @id: Object identifier
  * @id_len: length of identifier
  * @parser_func: pointer to the corresponding parsing function
- * 
+ *
  */
 typedef struct s_object_parser
 {
-	const char	*id;
-	int			id_len;
-	t_parse_status		(*parser_func)(char **, t_scene *);
-}		t_object_parser;
+	const char		*id;
+	int				id_len;
+	t_parse_status	(*parser_func)(char **, t_scene *);
+}					t_object_parser;
 
 #endif /* STRUCTS_H */

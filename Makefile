@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
+#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/17 16:37:09 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/17 20:46:51 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
