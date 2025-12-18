@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 09:04:51 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 09:07:58 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void			render_test_pattern(t_mlx *mlx, t_scene *scene);
 // Selection
 void			select_object(t_scene *scene, int x, int y);
 void			deselect_object(t_scene *scene);
-t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
+// t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
 
 int	clamp(int value);
 t_color	add_colors(t_color c1, t_color c2);
