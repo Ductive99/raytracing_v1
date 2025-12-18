@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 07:12:35 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 09:01:33 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ t_vec3  get_sphere_normal(t_sphere *sp, t_vec3 hit_point);
 int	clamp(int value);
 t_color	add_colors(t_color c1, t_color c2);
 t_color	scale_color(t_color c, double intensity);
-t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color);
+t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color, t_vec3 ray_dir);
 int is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point, t_vec3 normal);
+t_color get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal, t_vec3 view_dir);
 
 // // Vector math functions
 
