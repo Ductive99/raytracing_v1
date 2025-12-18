@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/17 16:38:48 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:21:01 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	init_scene(t_scene *scene)
 	scene->spheres = NULL;
 	scene->planes = NULL;
 	scene->cylinders = NULL;
+	scene->selection.type = OBJ_NONE;
+	scene->selection.object = NULL;
 }
 
 /**
@@ -34,12 +36,17 @@ static void	init_scene(t_scene *scene)
  *
  * This function registers:
  * - Key press events (for ESC key)
+ * - Key release events (for full render after transform)
  * - Window close event (red X button)
+ * - Mouse click events (for object selection)
  */
 static void	setup_hooks(t_mlx *mlx)
 {
+	mlx_do_key_autorepeatoff(mlx->mlx_ptr);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, handle_keypress, mlx);
+	mlx_hook(mlx->win_ptr, 3, 1L << 1, handle_keyrelease, mlx);
 	mlx_hook(mlx->win_ptr, 17, 0, handle_close, mlx);
+	mlx_mouse_hook(mlx->win_ptr, handle_mouse, mlx);
 }
 
 /**

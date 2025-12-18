@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/14 16:06:25 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 07:53:02 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_mlx(t_mlx *mlx)
 		print_err("Error: Failed to initialize MLX\n");
 		return (1);
 	}
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT,
 			WIN_TITLE);
 	if (!mlx->win_ptr)
 	{

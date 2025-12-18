@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 02:39:16 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static void	check_spheres(t_ray ray, t_scene *scene, t_hit *closest)
 		if (hit_sphere(ray, (t_sphere *)node->obj, &current))
 		{
 			if (current.t > 0.001 && current.t < closest->t)
+			{
 				*closest = current;
+				closest->obj_type = OBJ_SPHERE;
+				closest->object = node->obj;
+			}
 		}
 		node = node->next;
 	}
@@ -42,7 +46,11 @@ static void	check_planes(t_ray ray, t_scene *scene, t_hit *closest)
 		if (hit_plane(ray, (t_plan *)node->obj, &current))
 		{
 			if (current.t > 0.001 && current.t < closest->t)
+			{
 				*closest = current;
+				closest->obj_type = OBJ_PLANE;
+				closest->object = node->obj;
+			}
 		}
 		node = node->next;
 	}
@@ -59,12 +67,20 @@ static void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest)
 		if (hit_cylinder(ray, (t_cylinder *)node->obj, &current))
 		{
 			if (current.t > 0.001 && current.t < closest->t)
+			{
 				*closest = current;
+				closest->obj_type = OBJ_CYLINDER;
+				closest->object = node->obj;
+			}
 		}
 		if (hit_cylinder_caps(ray, (t_cylinder *)node->obj, &current))
 		{
 			if (current.t > 0.001 && current.t < closest->t)
+			{
 				*closest = current;
+				closest->obj_type = OBJ_CYLINDER;
+				closest->object = node->obj;
+			}
 		}
 		node = node->next;
 	}
@@ -77,15 +93,32 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
 
 	closest.hit = false;
 	closest.t = DBL_MAX;
+	closest.obj_type = OBJ_NONE;
+	closest.object = NULL;
 	check_spheres(ray, scene, &closest);
 	check_planes(ray, scene, &closest);
 	check_cylinders(ray, scene, &closest);
 	if (closest.hit)
 	{
-		return (calculate_lighting(scene, closest.point, closest.normal, closest.color));
+		return (calculate_lighting(scene, closest.point, closest.normal,
+				closest.color));
 	}
 	background.r = 0;
 	background.g = 0;
 	background.b = 0;
 	return (background);
+}
+
+t_hit	trace_ray_select(t_ray ray, t_scene *scene)
+{
+	t_hit	closest;
+
+	closest.hit = false;
+	closest.t = DBL_MAX;
+	closest.obj_type = OBJ_NONE;
+	closest.object = NULL;
+	check_spheres(ray, scene, &closest);
+	check_planes(ray, scene, &closest);
+	check_cylinders(ray, scene, &closest);
+	return (closest);
 }
