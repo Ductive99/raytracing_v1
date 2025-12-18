@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
+#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 02:37:35 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ SRC_FILES	= main.c \
 		mlx/init_mlx.c \
 		mlx/put_pixel.c \
 		mlx/render.c \
+		transform/transform.c \
+		transform/selection.c \
 
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))

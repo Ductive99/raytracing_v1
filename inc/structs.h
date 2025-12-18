@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 21:04:28 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ typedef enum e_parse_status
 	PARSE_SUCCESS = 0,
 	PARSE_ERROR = 1
 }					t_parse_status;
+
+/**
+ * t_object_type - Type of object in scene
+ */
+typedef enum e_object_type
+{
+	OBJ_NONE = 0,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	OBJ_LIGHT,
+	OBJ_CAMERA
+}					t_object_type;
+
+/**
+ * t_selection - Currently selected object for transformation
+ *
+ * @type: Type of object selected
+ * @object: Pointer to the selected object
+ */
+typedef struct s_selection
+{
+	t_object_type	type;
+	void			*object;
+}					t_selection;
 
 /**
  * t_img - Image buffer structure for pixel manipulation
@@ -108,6 +133,8 @@ typedef struct s_color
  * @point: 3D coordinates of the intersection point
  * @normal: Surface normal at the hit point (normalized, pointing outward)
  * @color: Color of the object at the hit point
+ * @obj_type: Type of object hit
+ * @object: Pointer to the hit object
  */
 typedef struct s_hit
 {
@@ -116,6 +143,8 @@ typedef struct s_hit
 	t_point			point;
 	t_vec3			normal;
 	t_color			color;
+	t_object_type	obj_type;
+	void			*object;
 }					t_hit;
 
 typedef struct s_quadratic
@@ -243,6 +272,7 @@ typedef struct s_cylinder
  * @spheres: Linked list of sphere objects to render
  * @planes: Linked list of plane objects to render
  * @cylinders: Linked list of cylinder objects to render
+ * @selection: Currently selected object for transformation
  */
 typedef struct s_scene
 {
@@ -252,6 +282,7 @@ typedef struct s_scene
 	t_list			*spheres;
 	t_list			*planes;
 	t_list			*cylinders;
+	t_selection		selection;
 }					t_scene;
 
 /**
