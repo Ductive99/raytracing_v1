@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 08:25:38 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:55:57 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ int				handle_keyrelease(int keycode, t_mlx *mlx);
 
 // HUD
 void			draw_hud(t_mlx *mlx, t_scene *scene);
+int				handle_hud_click(int x, int y, t_scene *scene);
+void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
 // // Vector math functions
 

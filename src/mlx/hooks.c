@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 08:21:00 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:55:58 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,23 @@ int	handle_keyrelease(int keycode, t_mlx *mlx)
 int	handle_mouse(int button, int x, int y, t_mlx *mlx)
 {
 	t_scene	*scene;
+	int		hud_result;
 
 	scene = (t_scene *)mlx->scene;
 	if (button == MOUSE_LEFT)
 	{
+		hud_result = handle_hud_click(x, y, scene);
+		if (hud_result == 2)
+		{
+			cleanup_scene(scene);
+			cleanup_mlx(mlx);
+			exit(0);
+		}
+		if (hud_result == 1)
+		{
+			render_scene_threaded(scene, mlx);
+			return (0);
+		}
 		select_object(scene, x, y);
 		render_scene_threaded(scene, mlx);
 	}

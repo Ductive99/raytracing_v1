@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 08:19:09 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:55:57 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,40 @@ typedef struct s_selection
 	t_object_type	type;
 	void			*object;
 }					t_selection;
+
+/**
+ * t_button - Interactive button for HUD
+ */
+typedef struct s_button
+{
+	int				x;
+	int				y;
+	int				w;
+	int				h;
+	int				action;
+	char			*label;
+}					t_button;
+
+# define BTN_MOVE_LEFT 1
+# define BTN_MOVE_RIGHT 2
+# define BTN_MOVE_UP 3
+# define BTN_MOVE_DOWN 4
+# define BTN_MOVE_FWD 5
+# define BTN_MOVE_BACK 6
+# define BTN_ROT_LEFT 7
+# define BTN_ROT_RIGHT 8
+# define BTN_ROT_UP 9
+# define BTN_ROT_DOWN 10
+# define BTN_SIZE_UP 11
+# define BTN_SIZE_DOWN 12
+# define BTN_DESELECT 13
+# define BTN_QUIT 14
+# define NUM_BUTTONS 14
+
+# define HUD_X (WIDTH - 280)
+# define HUD_Y 10
+# define HUD_W 270
+# define HUD_H 480
 
 /**
  * t_img - Image buffer structure for pixel manipulation
