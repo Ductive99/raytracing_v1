@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 02:04:52 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 07:12:35 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	clamp(int value);
 t_color	add_colors(t_color c1, t_color c2);
 t_color	scale_color(t_color c, double intensity);
 t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color);
+int is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point, t_vec3 normal);
 
 // // Vector math functions
 

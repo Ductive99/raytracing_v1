@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 22:40:54 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 02:25:09 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 07:11:51 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_co
     while (current_light_node)
     {
         current_light = (t_light *)current_light_node->obj;
-        
-        light_contribution = get_light_contribution(current_light, hit_point, normal);
-        
-        total_diffuse = add_colors(total_diffuse, light_contribution);
-        
+
+		if (!is_in_shadow(scene, current_light, hit_point, normal))
+        {
+        	light_contribution = get_light_contribution(current_light, hit_point, normal);
+        	total_diffuse = add_colors(total_diffuse, light_contribution);
+		}
         current_light_node = current_light_node->next;
     }
 

@@ -6,7 +6,7 @@
 #    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 02:37:35 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/18 07:13:06 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILES	= main.c \
 		render/ray.c \
 		light/color.c \
 		light/lighting.c \
+		light/shadow.c \
 		utils/count_split.c \
 		utils/free_split.c \
 		utils/ft_atoi.c \
