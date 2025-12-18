@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 08:55:57 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:24:13 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ typedef struct s_button
 # define BTN_SIZE_DOWN 12
 # define BTN_DESELECT 13
 # define BTN_QUIT 14
+# define BTN_LIGHT_BASE 100
+# define MAX_LIGHTS 8
 # define NUM_BUTTONS 14
 
 # define HUD_X (WIDTH - 280)
 # define HUD_Y 10
 # define HUD_W 270
-# define HUD_H 480
+# define HUD_H 560
 
 /**
  * t_img - Image buffer structure for pixel manipulation

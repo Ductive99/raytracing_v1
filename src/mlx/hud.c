@@ -6,13 +6,15 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 09:16:13 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:27:09 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static t_button	g_buttons[NUM_BUTTONS];
+static t_button	g_light_btns[MAX_LIGHTS];
+static int		g_num_lights = 0;
 
 static void	draw_rect(t_img *img, int x, int y, int w, int h, int color)
 {
@@ -92,6 +94,27 @@ static void	init_buttons(void)
 	by = HUD_Y + 420;
 	init_button(13, cx, by, BTN_QUIT, "QUIT");
 	g_buttons[13].w = 100;
+}
+
+static void	count_lights(t_scene *scene)
+{
+	t_list	*lst;
+	int		i;
+
+	i = 0;
+	lst = scene->lights;
+	while (lst && i < MAX_LIGHTS)
+	{
+		g_light_btns[i].x = HUD_X + 35;
+		g_light_btns[i].y = HUD_Y + 480 + i * 30;
+		g_light_btns[i].w = 80;
+		g_light_btns[i].h = 25;
+		g_light_btns[i].action = BTN_LIGHT_BASE + i;
+		g_light_btns[i].label = "Light X";
+		lst = lst->next;
+		i++;
+	}
+	g_num_lights = i;
 }
 
 static void	draw_button(t_mlx *mlx, t_button *btn)
@@ -174,15 +197,59 @@ static void	draw_all_buttons(t_mlx *mlx)
 	}
 }
 
+static void	draw_light_buttons(t_mlx *mlx, t_scene *scene)
+{
+	int		i;
+	int		sel;
+	t_list	*lst;
+	char	num[2];
+
+	i = 0;
+	lst = scene->lights;
+	while (i < g_num_lights)
+	{
+		sel = (scene->selection.type == OBJ_LIGHT
+				&& scene->selection.object == lst->obj);
+		if (sel)
+			draw_rect(&mlx->img, g_light_btns[i].x - 2, g_light_btns[i].y - 2,
+				g_light_btns[i].w + 4, g_light_btns[i].h + 4, 0xFFAA00);
+		draw_button(mlx, &g_light_btns[i]);
+		num[0] = '1' + i;
+		num[1] = '\0';
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, g_light_btns[i].x + 10,
+			g_light_btns[i].y + 17, 0xFF88FF, "Light");
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, g_light_btns[i].x + 50,
+			g_light_btns[i].y + 17, 0xFF88FF, num);
+		lst = lst->next;
+		i++;
+	}
+}
+
+static char	*get_selection_name(t_scene *scene)
+{
+	if (scene->selection.type == OBJ_SPHERE)
+		return ("Sphere");
+	else if (scene->selection.type == OBJ_PLANE)
+		return ("Plane");
+	else if (scene->selection.type == OBJ_CYLINDER)
+		return ("Cylinder");
+	else if (scene->selection.type == OBJ_LIGHT)
+		return ("Light");
+	else if (scene->selection.type == OBJ_CAMERA)
+		return ("Camera");
+	return ("None");
+}
+
 void	draw_hud(t_mlx *mlx, t_scene *scene)
 {
 	static int	init = 0;
-	char		*mode;
+	char		*sel_name;
 	int			color;
 
 	if (!init)
 	{
 		init_buttons();
+		count_lights(scene);
 		init = 1;
 	}
 	draw_panel_bg(mlx);
@@ -194,20 +261,17 @@ void	draw_hud(t_mlx *mlx, t_scene *scene)
 	draw_section(mlx, HUD_Y + 70, "MOVE");
 	draw_section(mlx, HUD_Y + 180, "ROTATE");
 	draw_section(mlx, HUD_Y + 270, "SIZE");
-	draw_section(mlx, HUD_Y + 330, "MODE");
+	draw_section(mlx, HUD_Y + 330, "SELECTED");
+	draw_section(mlx, HUD_Y + 460, "LIGHTS");
+	draw_light_buttons(mlx, scene);
 	draw_btn_labels(mlx);
+	sel_name = get_selection_name(scene);
 	if (scene->selection.type != OBJ_NONE)
-	{
-		mode = "[ OBJECT ]";
 		color = 0xFF8800;
-	}
 	else
-	{
-		mode = "[ CAMERA ]";
 		color = 0x00FFAA;
-	}
-	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, HUD_X + 90, HUD_Y + 355, color,
-		mode);
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, HUD_X + 95, HUD_Y + 355, color,
+		sel_name);
 }
 
 void	rotate_hud(t_scene *scene, t_vec3 axis, double angle)
@@ -274,12 +338,52 @@ static int	do_other(t_scene *scene, int action)
 	return (1);
 }
 
+static void	select_light_by_idx(t_scene *scene, int idx)
+{
+	t_list	*lst;
+	int		i;
+
+	lst = scene->lights;
+	i = 0;
+	while (lst && i < idx)
+	{
+		lst = lst->next;
+		i++;
+	}
+	if (lst)
+	{
+		scene->selection.type = OBJ_LIGHT;
+		scene->selection.object = lst->obj;
+	}
+}
+
+static int	check_light_click(int x, int y, t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < g_num_lights)
+	{
+		if (x >= g_light_btns[i].x && x < g_light_btns[i].x + g_light_btns[i].w
+			&& y >= g_light_btns[i].y && y < g_light_btns[i].y
+			+ g_light_btns[i].h)
+		{
+			select_light_by_idx(scene, i);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	handle_hud_click(int x, int y, t_scene *scene)
 {
 	int	i;
 	int	act;
 	int	ret;
 
+	if (check_light_click(x, y, scene))
+		return (1);
 	i = 0;
 	while (i < NUM_BUTTONS)
 	{
