@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 02:21:20 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 16:44:36 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 12:28:56 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static t_parse_status	parse_object_wrapper(char *line,
 							t_parse_status (*parser_func)(char **, t_scene *),
 							t_scene *scene);
 
+
+#include <sys/stat.h>
+struct stat st;
+							
 /**
  * parse_scene - reads and parses scene file
  *
@@ -29,6 +33,8 @@ int	parse_scene(char *filename, t_scene *scene)
 	int		fd;
 	char	*line;
 
+	if (stat(filename, &st) == 0 && S_ISDIR(st.st_mode))
+	    return (print_err("Cannot open directory"), PARSE_ERROR);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (perror("Failed to open file"), PARSE_ERROR);
