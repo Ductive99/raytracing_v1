@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 08:21:01 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:37:23 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv)
 	init_scene(&scene);
 	if (parse_scene(argv[1], &scene) == PARSE_ERROR)
 	{
+		cleanup_scene(&scene);
 		printf("Error: Failed to parse scene\n");
 		return (1);
 	}
