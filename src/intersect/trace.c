@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 09:20:13 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
 	if (closest.hit)
 	{
 		return (calculate_lighting(scene, closest.point, closest.normal,
-				closest.color));
+				closest.color, ray.direction));
 	}
 	background.r = 0;
 	background.g = 0;
