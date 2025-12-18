@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 08:55:57 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:26:01 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,17 @@ void			render_test_pattern(t_mlx *mlx, t_scene *scene);
 // Selection
 void			select_object(t_scene *scene, int x, int y);
 void			deselect_object(t_scene *scene);
-t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
+// t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
 
+int	clamp(int value);
+t_color	add_colors(t_color c1, t_color c2);
+t_color	scale_color(t_color c, double intensity);
+t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color, t_vec3 ray_dir);
+int is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point, t_vec3 normal);
+t_color get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal, t_vec3 view_dir);
 int				clamp(int value);
 t_color			add_colors(t_color c1, t_color c2);
 t_color			scale_color(t_color c, double intensity);
-t_color			calculate_lighting(t_scene *scene, t_vec3 hit_point,
-					t_vec3 normal, t_color obj_color);
 int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
 					t_vec3 normal);
 
