@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:19:09 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define STRUCTS_H
 
 # include <stdbool.h>
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1600
+# define HEIGHT 900
 
 typedef enum e_parse_status
 {
@@ -284,6 +284,24 @@ typedef struct s_scene
 	t_list			*cylinders;
 	t_selection		selection;
 }					t_scene;
+
+/**
+ * t_render_task - Thread rendering task structure
+ *
+ * @mlx: Pointer to MLX structure
+ * @scene: Pointer to scene
+ * @y_start: Starting row for this thread
+ * @y_end: Ending row for this thread
+ * @scale: Render scale (1 = full, 4 = fast)
+ */
+typedef struct s_render_task
+{
+	void			*mlx;
+	void			*scene;
+	int				y_start;
+	int				y_end;
+	int				scale;
+}					t_render_task;
 
 /**
  * t_object_parser - Object parsing structure

@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:25:38 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
@@ -54,6 +55,13 @@
 # define MOVE_SPEED 0.5
 # define ROTATE_SPEED 5.0
 # define RESIZE_SPEED 0.2
+
+// Render modes
+# define RENDER_FULL 1
+# define RENDER_FAST 4
+
+// Multi-threading
+# define NUM_THREADS 8
 
 // Parsing
 int				parse_scene(char *filename, t_scene *scene);
@@ -108,20 +116,28 @@ void			select_object(t_scene *scene, int x, int y);
 void			deselect_object(t_scene *scene);
 t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
 
-// Transform
-void			translate_selection(t_scene *scene, t_vec3 delta);
-void			rotate_selection(t_scene *scene, t_vec3 axis, double angle);
-void			resize_selection(t_scene *scene, double factor);
-void			translate_camera(t_scene *scene, t_vec3 delta);
-void			rotate_camera(t_scene *scene, t_vec3 axis, double angle);
-
-t_vec3			get_sphere_normal(t_sphere *sp, t_vec3 hit_point);
-
 int				clamp(int value);
 t_color			add_colors(t_color c1, t_color c2);
 t_color			scale_color(t_color c, double intensity);
 t_color			calculate_lighting(t_scene *scene, t_vec3 hit_point,
 					t_vec3 normal, t_color obj_color);
+int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
+					t_vec3 normal);
+
+// Transform functions
+void			translate_selection(t_scene *scene, t_vec3 delta);
+void			translate_camera(t_scene *scene, t_vec3 delta);
+void			rotate_selection(t_scene *scene, t_vec3 axis, double angle);
+void			rotate_camera(t_scene *scene, t_vec3 axis, double angle);
+void			resize_selection(t_scene *scene, double factor);
+
+// Render functions
+void			render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
+void			render_scene_threaded(t_scene *scene, t_mlx *mlx);
+int				handle_keyrelease(int keycode, t_mlx *mlx);
+
+// HUD
+void			draw_hud(t_mlx *mlx, t_scene *scene);
 
 // // Vector math functions
 

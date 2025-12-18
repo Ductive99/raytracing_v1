@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 08:21:00 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,16 @@ int	handle_keypress(int keycode, t_mlx *mlx)
 		handle_resize_keys(keycode, scene);
 	else if (keycode == KEY_R)
 		deselect_object(scene);
-	setup_camera(&scene->camera, WIN_WIDTH, WIN_HEIGHT);
-	render_scene(scene, mlx);
+	else
+		return (0);
+	render_scene_threaded(scene, mlx);
+	return (0);
+}
+
+int	handle_keyrelease(int keycode, t_mlx *mlx)
+{
+	(void)keycode;
+	(void)mlx;
 	return (0);
 }
 
@@ -108,39 +116,16 @@ int	handle_mouse(int button, int x, int y, t_mlx *mlx)
 	if (button == MOUSE_LEFT)
 	{
 		select_object(scene, x, y);
-		render_scene(scene, mlx);
+		render_scene_threaded(scene, mlx);
 	}
 	else if (button == MOUSE_RIGHT)
 	{
 		deselect_object(scene);
-		render_scene(scene, mlx);
-	}
-	else if (button == MOUSE_SCROLL_UP)
-	{
-		if (scene->selection.type != OBJ_NONE)
-			resize_selection(scene, 1.0 + RESIZE_SPEED);
-		setup_camera(&scene->camera, WIN_WIDTH, WIN_HEIGHT);
-		render_scene(scene, mlx);
-	}
-	else if (button == MOUSE_SCROLL_DOWN)
-	{
-		if (scene->selection.type != OBJ_NONE)
-			resize_selection(scene, 1.0 - RESIZE_SPEED);
-		setup_camera(&scene->camera, WIN_WIDTH, WIN_HEIGHT);
-		render_scene(scene, mlx);
+		render_scene_threaded(scene, mlx);
 	}
 	return (0);
 }
 
-/**
- * handle_close - Handle window close event (red X button)
- * @mlx: Pointer to MLX structure
- *
- * This function is called when the user clicks the window's close button.
- * It properly cleans up all resources before exiting.
- *
- * Return: 0 on success
- */
 int	handle_close(t_mlx *mlx)
 {
 	cleanup_scene((t_scene *)mlx->scene);

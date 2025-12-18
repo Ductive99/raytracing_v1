@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 07:18:31 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/18 08:25:38 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,11 @@ SRC_FILES	= main.c \
 		intersect/trace.c \
 		render/camera.c \
 		render/render.c \
+		render/render_fast.c \
 		render/ray.c \
 		light/color.c \
 		light/lighting.c \
+		light/shadow.c \
 		utils/count_split.c \
 		utils/free_split.c \
 		utils/ft_atoi.c \
@@ -55,6 +57,7 @@ SRC_FILES	= main.c \
 		utils/print_error.c \
 		mlx/cleanup.c \
 		mlx/hooks.c \
+		mlx/hud.c \
 		mlx/init_mlx.c \
 		mlx/put_pixel.c \
 		mlx/render.c \
@@ -67,13 +70,13 @@ OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # Compiler and flags
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g -pthread
 INCLUDES	= -I$(INC_DIR) -I$(MLX_DIR)
 DEFINES		= -D_USE_MATH_DEFINES
 
 # Libraries
 MLX_LIB		= $(MLX_DIR)/libmlx.a
-LIBS		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+LIBS		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -pthread
 
 # Colors for output
 GREEN		= \033[0;32m

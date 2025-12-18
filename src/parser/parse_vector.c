@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 02:08:12 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 03:14:44 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_parse_status	parse_vector(char *str, t_vec3 *vec)
 	free_split(coords);
 	return (PARSE_SUCCESS);
 }
-
 
 t_parse_status is_normalized(t_vec3 v)
 {
