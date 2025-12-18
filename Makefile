@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/17 23:04:58 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/18 02:26:23 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_FILES	= main.c \
 		intersect/sphere.c \
 		intersect/plane.c \
 		intersect/cylinder.c \
+		intersect/cylinder_caps.c \
 		intersect/trace.c \
 		render/camera.c \
 		render/render.c \

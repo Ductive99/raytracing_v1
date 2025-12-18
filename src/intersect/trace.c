@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 23:04:58 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:29:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ static void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest)
 	while (node)
 	{
 		if (hit_cylinder(ray, (t_cylinder *)node->obj, &current))
+		{
+			if (current.t > 0.001 && current.t < closest->t)
+				*closest = current;
+		}
+		if (hit_cylinder_caps(ray, (t_cylinder *)node->obj, &current))
 		{
 			if (current.t > 0.001 && current.t < closest->t)
 				*closest = current;
