@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 14:48:35 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:04:52 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_parse_status	parse_light(char **split, t_scene *scene);
 t_parse_status	parse_plane(char **split, t_scene *scene);
 t_parse_status	parse_sphere(char **split, t_scene *scene);
 t_parse_status	parse_cylinder(char **split, t_scene *scene);
-t_parse_status	check_normalized_vector(t_vec3 *vec);
+t_parse_status  is_normalized(t_vec3 v);
 
 // Utils
 
@@ -77,6 +77,13 @@ int				handle_close(t_mlx *mlx);
 void			put_pixel(t_img *img, int x, int y, int color);
 int				rgb_to_int(int r, int g, int b);
 void			render_test_pattern(t_mlx *mlx, t_scene *scene);
+
+t_vec3  get_sphere_normal(t_sphere *sp, t_vec3 hit_point);
+
+int	clamp(int value);
+t_color	add_colors(t_color c1, t_color c2);
+t_color	scale_color(t_color c, double intensity);
+t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color);
 
 // // Vector math functions
 

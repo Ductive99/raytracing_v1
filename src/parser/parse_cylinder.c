@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:37:07 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:06:22 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_parse_status	parse_cylinder(char **split, t_scene *scene)
 	if (parse_vector(split[2], &cylinder->axis) == PARSE_ERROR)
 		return (free(cylinder), print_err("Invalid cylinder axis"),
 			PARSE_ERROR);
-	if (check_normalized_vector(&cylinder->axis) == PARSE_ERROR)
+	if (is_normalized(cylinder->axis) == PARSE_ERROR)
 		return (free(cylinder), print_err("Cylinder axis must be normalized"),
 			PARSE_ERROR);
 	cylinder->diameter = ft_strtod(split[3], &endptr);
