@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:34:48 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:08:12 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ t_parse_status	parse_vector(char *str, t_vec3 *vec)
 	return (PARSE_SUCCESS);
 }
 
-/**
- * check_normalized_vector - Verify vector is normalized (length ~1.0)
- */
-t_parse_status	check_normalized_vector(t_vec3 *vec)
-{
-	double	len;
 
-	len = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-	if (len < 0.99 || len > 1.01)
-		return (PARSE_ERROR);
-	return (PARSE_SUCCESS);
+t_parse_status is_normalized(t_vec3 v)
+{
+    float len_squared = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
+
+    if (fabs(len_squared - 1.0f) < 0.001)
+        return (PARSE_SUCCESS);
+    return (PARSE_ERROR);
 }

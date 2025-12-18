@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 23:04:58 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:26:01 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
 	check_planes(ray, scene, &closest);
 	check_cylinders(ray, scene, &closest);
 	if (closest.hit)
-		return (closest.color);
+	{
+		return (calculate_lighting(scene, closest.point, closest.normal, closest.color));
+	}
 	background.r = 0;
 	background.g = 0;
 	background.b = 0;

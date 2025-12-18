@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
+#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/17 23:04:58 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/18 01:26:13 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC_FILES	= main.c \
 		render/camera.c \
 		render/render.c \
 		render/ray.c \
+		light/color.c \
+		light/lighting.c \
 		utils/count_split.c \
 		utils/free_split.c \
 		utils/ft_atoi.c \
