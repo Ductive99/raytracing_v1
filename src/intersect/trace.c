@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 11:01:08 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/18 21:10:41 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,53 @@ static void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest)
 
 t_color	trace_ray(t_ray ray, t_scene *scene)
 {
-	t_hit	closest;
-	t_color	background;
+    t_hit	closest;
+    t_color	background;
+    double	u;
+    double	v;
 
-	closest.hit = false;
-	closest.t = DBL_MAX;
-	closest.obj_type = OBJ_NONE;
-	closest.object = NULL;
-	check_spheres(ray, scene, &closest);
-	check_planes(ray, scene, &closest);
-	check_cylinders(ray, scene, &closest);
-	if (closest.hit)
-	{
-		return (calculate_lighting(scene, closest.point, closest.normal,
-				closest.color, ray.direction));
-	}
-	background.r = 0;
-	background.g = 0;
-	background.b = 0;
-	return (background);
+    closest.hit = false;
+    closest.t = DBL_MAX;
+    closest.obj_type = OBJ_NONE;
+    closest.object = NULL;
+    check_spheres(ray, scene, &closest);
+    check_planes(ray, scene, &closest);
+    check_cylinders(ray, scene, &closest);
+    if (closest.hit)
+    {
+        // Apply checkerboard pattern only if this object is selected
+        if (scene->selection.type != OBJ_NONE && 
+            scene->selection.object == closest.object)
+        {
+            t_color inverted;
+            inverted.r = 255 - closest.color.r;
+            inverted.g = 255 - closest.color.g;
+            inverted.b = 255 - closest.color.b;
+            
+            if (closest.obj_type == OBJ_PLANE)
+            {
+                get_plane_uv(closest.point, &u, &v);
+                closest.color = get_checker_color(u, v, closest.color, inverted);
+            }
+            else if (closest.obj_type == OBJ_SPHERE)
+            {
+                get_sphere_uv(closest.normal, &u, &v);
+                closest.color = get_checker_color(u, v, closest.color, inverted);
+            }
+            else if (closest.obj_type == OBJ_CYLINDER)
+            {
+                get_cylinder_uv((t_cylinder *)closest.object, closest.point, &u, &v);
+                closest.color = get_checker_color(u, v, closest.color, inverted);
+            }
+        }
+        
+        return (calculate_lighting(scene, closest.point, closest.normal,
+                closest.color, ray.direction));
+    }
+    background.r = 0;
+    background.g = 0;
+    background.b = 0;
+    return (background);
 }
 
 t_hit	trace_ray_select(t_ray ray, t_scene *scene)

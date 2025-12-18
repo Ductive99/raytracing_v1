@@ -6,7 +6,7 @@
 #    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 09:04:13 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/18 12:16:34 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES	= main.c \
 		light/lighting.c \
 		light/shadow.c \
 		light/specular.c \
+		texture/texture.c \
 		utils/count_split.c \
 		utils/free_split.c \
 		utils/ft_atoi.c \
@@ -71,7 +72,7 @@ OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # Compiler and flags
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -pthread
+CFLAGS		= -Wall -Wextra -Werror -g -pthread -Ofast
 INCLUDES	= -I$(INC_DIR) -I$(MLX_DIR)
 DEFINES		= -D_USE_MATH_DEFINES
 
