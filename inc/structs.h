@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 11:24:13 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:58:41 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum e_object_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CYLINDER_CAP,
 	OBJ_LIGHT,
 	OBJ_CAMERA
 }					t_object_type;
