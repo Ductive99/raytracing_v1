@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/14 17:34:41 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	cleanup_scene(t_scene *scene)
 		ft_lstclear(&scene->planes, free);
 	if (scene->cylinders)
 		ft_lstclear(&scene->cylinders, free);
-	free(scene->lights);
+	if (scene->cones)
+		ft_lstclear(&scene->cones, free);
 }
 
 /**

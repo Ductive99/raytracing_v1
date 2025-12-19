@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 11:27:09 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,8 @@ static char	*get_selection_name(t_scene *scene)
 		return ("Plane");
 	else if (scene->selection.type == OBJ_CYLINDER)
 		return ("Cylinder");
+	else if (scene->selection.type == OBJ_CONE)
+		return ("Cone");
 	else if (scene->selection.type == OBJ_LIGHT)
 		return ("Light");
 	else if (scene->selection.type == OBJ_CAMERA)

@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 11:24:13 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum e_object_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CONE,
 	OBJ_LIGHT,
 	OBJ_CAMERA
 }					t_object_type;
@@ -300,6 +301,24 @@ typedef struct s_cylinder
 }					t_cylinder;
 
 /**
+ * t_cone - Cone object (identifier: co)
+ *
+ * @apex: x,y,z coordinates of the cone apex (tip)
+ * @axis: 3D normalized vector of cone axis [-1,1] for each axis
+ * @angle: Half-angle of the cone in degrees
+ * @height: Cone height from apex
+ * @color: RGB color values [0-255]
+ */
+typedef struct s_cone
+{
+	t_point			apex;
+	t_vec3			axis;
+	double			angle;
+	double			height;
+	t_color			color;
+}					t_cone;
+
+/**
  * t_scene - Complete scene structure containing all rendering elements
  *
  * @ambient: Ambient lighting
@@ -318,6 +337,7 @@ typedef struct s_scene
 	t_list			*spheres;
 	t_list			*planes;
 	t_list			*cylinders;
+	t_list			*cones;
 	t_selection		selection;
 }					t_scene;
 

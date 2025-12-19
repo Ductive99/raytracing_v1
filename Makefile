@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
+#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 12:16:34 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES	= main.c \
 		parser/parse_sphere.c \
 		parser/parse_plane.c \
 		parser/parse_cylinder.c \
+		parser/parse_cone.c \
 		parser/parse_color.c \
 		parser/parse_vector.c \
 		math/vector_ops.c \
@@ -35,6 +36,7 @@ SRC_FILES	= main.c \
 		intersect/plane.c \
 		intersect/cylinder.c \
 		intersect/cylinder_caps.c \
+		intersect/cone.c \
 		intersect/trace.c \
 		render/camera.c \
 		render/render.c \

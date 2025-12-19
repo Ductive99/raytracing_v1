@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 12:15:56 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_parse_status	parse_light(char **split, t_scene *scene);
 t_parse_status	parse_plane(char **split, t_scene *scene);
 t_parse_status	parse_sphere(char **split, t_scene *scene);
 t_parse_status	parse_cylinder(char **split, t_scene *scene);
+t_parse_status	parse_cone(char **split, t_scene *scene);
 t_parse_status	is_normalized(t_vec3 v);
 
 // Utils
@@ -116,12 +117,15 @@ void			select_object(t_scene *scene, int x, int y);
 void			deselect_object(t_scene *scene);
 // t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
 
-int	clamp(int value);
-t_color	add_colors(t_color c1, t_color c2);
-t_color	scale_color(t_color c, double intensity);
-t_color calculate_lighting(t_scene *scene, t_vec3 hit_point, t_vec3 normal, t_color obj_color, t_vec3 ray_dir);
-int is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point, t_vec3 normal);
-t_color get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal, t_vec3 view_dir);
+int				clamp(int value);
+t_color			add_colors(t_color c1, t_color c2);
+t_color			scale_color(t_color c, double intensity);
+t_color			calculate_lighting(t_scene *scene, t_vec3 hit_point,
+					t_vec3 normal, t_color obj_color, t_vec3 ray_dir);
+int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
+					t_vec3 normal);
+t_color			get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal,
+					t_vec3 view_dir);
 int				clamp(int value);
 t_color			add_colors(t_color c1, t_color c2);
 t_color			scale_color(t_color c, double intensity);
@@ -145,9 +149,12 @@ void			draw_hud(t_mlx *mlx, t_scene *scene);
 int				handle_hud_click(int x, int y, t_scene *scene);
 void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
-t_color get_checker_color(double u, double v, t_color c1, t_color c2);
-void get_plane_uv(t_vec3 hit_point, double *u, double *v);
-void get_sphere_uv(t_vec3 normal, double *u, double *v);
-void get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u, double *v);
+t_color			get_checker_color(double u, double v, t_color c1, t_color c2);
+void			get_plane_uv(t_vec3 hit_point, double *u, double *v);
+void			get_sphere_uv(t_vec3 normal, double *u, double *v);
+void			get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u,
+					double *v);
+void			get_cone_uv(t_cone *cone, t_vec3 hit_point, double *u,
+					double *v);
 
 #endif /* MINIRT_H */
