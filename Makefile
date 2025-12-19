@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
+#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 20:42:34 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/19 21:12:37 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,8 @@ SRC_FILES	= main.c \
 		mlx/hud_buttons.c \
 		mlx/hud_click.c \
 		mlx/hud_draw.c \
+		mlx/hud_init.c \
+		mlx/hud_utils.c \
 		mlx/init_mlx.c \
 		mlx/put_pixel.c \
 		mlx/render.c \

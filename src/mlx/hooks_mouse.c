@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:54:52 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	handle_mouse(int button, int x, int y, t_mlx *mlx)
 	scene = (t_scene *)mlx->scene;
 	if (button == MOUSE_LEFT)
 	{
-		hud_result = handle_hud_click(x, y, scene);
+		hud_result = handle_hud_click(x, y, mlx, scene);
 		if (hud_result == 2)
 		{
 			cleanup_scene(scene);

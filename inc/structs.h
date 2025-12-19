@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:29:47 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,29 @@ typedef struct s_img
 }					t_img;
 
 /**
+ * t_hud - HUD state structure
+ *
+ * @buttons: Array of HUD buttons
+ * @light_btns: Array of light selection buttons
+ * @num_lights: Number of lights in scene
+ * @initialized: Flag to track if HUD is initialized
+ */
+typedef struct s_hud
+{
+	t_button		buttons[NUM_BUTTONS];
+	t_button		light_btns[MAX_LIGHTS];
+	int				num_lights;
+	int				initialized;
+}					t_hud;
+
+/**
  * t_mlx - Main MLX context structure
  *
  * @mlx_ptr: MLX instance pointer returned by mlx_init()
  * @win_ptr: Window pointer returned by mlx_new_window()
  * @img: Image buffer structure for rendering
  * @scene: Pointer to the scene (for cleanup in hooks)
+ * @hud: HUD state structure
  */
 typedef struct s_mlx
 {
@@ -129,6 +146,7 @@ typedef struct s_mlx
 	void			*win_ptr;
 	t_img			img;
 	void			*scene;
+	t_hud			hud;
 }					t_mlx;
 
 /**

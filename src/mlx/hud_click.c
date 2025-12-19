@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:37:43 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,17 @@ int	hud_do_other(t_scene *scene, int action)
 	return (1);
 }
 
-int	hud_check_light_click(int x, int y, t_scene *scene)
+int	hud_check_light_click(int x, int y, t_mlx *mlx, t_scene *scene)
 {
-	int	i;
+	int			i;
+	t_button	*btn;
 
 	i = 0;
-	while (i < g_num_lights)
+	while (i < mlx->hud.num_lights)
 	{
-		if (x >= g_light_btns[i].x && x < g_light_btns[i].x + g_light_btns[i].w
-			&& y >= g_light_btns[i].y && y < g_light_btns[i].y
-			+ g_light_btns[i].h)
+		btn = &mlx->hud.light_btns[i];
+		if (x >= btn->x && x < btn->x + btn->w && y >= btn->y && y < btn->y
+			+ btn->h)
 		{
 			hud_select_light_by_idx(scene, i);
 			return (1);
@@ -89,28 +90,28 @@ int	hud_check_light_click(int x, int y, t_scene *scene)
 	return (0);
 }
 
-int	handle_hud_click(int x, int y, t_scene *scene)
+int	handle_hud_click(int x, int y, t_mlx *mlx, t_scene *scene)
 {
-	int	i;
-	int	act;
-	int	ret;
+	int			i;
+	int			ret;
+	t_button	*btn;
 
-	if (hud_check_light_click(x, y, scene))
+	if (hud_check_light_click(x, y, mlx, scene))
 		return (1);
 	i = 0;
 	while (i < NUM_BUTTONS)
 	{
-		if (x >= g_buttons[i].x && x < g_buttons[i].x + g_buttons[i].w
-			&& y >= g_buttons[i].y && y < g_buttons[i].y + g_buttons[i].h)
+		btn = &mlx->hud.buttons[i];
+		if (x >= btn->x && x < btn->x + btn->w && y >= btn->y && y < btn->y
+			+ btn->h)
 		{
-			act = g_buttons[i].action;
-			ret = hud_do_move(scene, act);
+			ret = hud_do_move(scene, btn->action);
 			if (ret)
 				return (ret);
-			ret = hud_do_rotate(scene, act);
+			ret = hud_do_rotate(scene, btn->action);
 			if (ret)
 				return (ret);
-			return (hud_do_other(scene, act));
+			return (hud_do_other(scene, btn->action));
 		}
 		i++;
 	}

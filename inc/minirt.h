@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:45:41 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest);
 
 // HUD
 void			draw_hud(t_mlx *mlx, t_scene *scene);
-int				handle_hud_click(int x, int y, t_scene *scene);
+int				handle_hud_click(int x, int y, t_mlx *mlx, t_scene *scene);
 void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
 t_color			get_checker_color(double u, double v, t_color c1, t_color c2);
