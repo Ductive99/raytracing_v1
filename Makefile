@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,12 @@ SRC_FILES	= main.c \
 		utils/linked_list_operations.c \
 		utils/print_error.c \
 		mlx/cleanup.c \
-		mlx/hooks.c \
+		mlx/hooks_keys.c \
+		mlx/hooks_mouse.c \
 		mlx/hud.c \
+		mlx/hud_buttons.c \
+		mlx/hud_click.c \
+		mlx/hud_draw.c \
 		mlx/init_mlx.c \
 		mlx/put_pixel.c \
 		mlx/render.c \
