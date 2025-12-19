@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
+#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 21:12:37 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/19 21:23:30 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,11 @@ SRC_FILES	= main.c \
 		intersect/check_planes.c \
 		intersect/check_spheres.c \
 		intersect/cone_hit.c \
-		texture/object_uv.c
+		texture/object_uv.c \
+		texture/plane_uv.c \
+		texture/sphere_uv.c \
+		texture/cylinder_uv.c \
+		texture/cone_uv.c
 
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))

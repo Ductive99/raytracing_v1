@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:53:56 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/17 14:49:24 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:20:47 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,10 @@ double	vec_len(t_vec3 v);
 
 double	vec_dot(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+
+void	get_cylinder_basis(t_vec3 axis, t_vec3 *right, t_vec3 *fwd);
+t_vec3	get_radial_vector(t_vec3 hit, t_vec3 center, t_vec3 axis);
+double	get_angle_u(t_vec3 radial, t_vec3 right, t_vec3 fwd);
+double	clamp_v(double v);
 
 #endif /* VECTOR_MATH_H */
