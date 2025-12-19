@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:02:31 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:51:46 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ bool	hit_cone_cap(t_ray ray, t_cone *cone, t_hit *hit);
 t_vec3	ray_at(t_ray ray, double t);
 t_color	trace_ray(t_ray ray, t_scene *scene);
 t_hit	trace_ray_select(t_ray ray, t_scene *scene);
+t_ray	init_shadow_ray(t_vec3 hit_point, t_vec3 normal, t_vec3 dir);
 
 #endif /* RAY_H */

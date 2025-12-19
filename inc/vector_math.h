@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:53:56 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 21:20:47 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:49:29 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 
 # define EPSILON 0.001
+# define M_PI		3.14159265358979323846
 
 t_vec3	vec_add(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_sub(t_vec3 v1, t_vec3 v2);
