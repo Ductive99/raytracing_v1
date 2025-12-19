@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 21:10:41 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 12:41:26 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest)
 			if (current.t > 0.001 && current.t < closest->t)
 			{
 				*closest = current;
-				closest->obj_type = OBJ_CYLINDER;
+				closest->obj_type = OBJ_CYLINDER_CAP;
 				closest->object = node->obj;
 			}
 		}
@@ -102,7 +102,6 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
     check_cylinders(ray, scene, &closest);
     if (closest.hit)
     {
-        // Apply checkerboard pattern only if this object is selected
         if (scene->selection.type != OBJ_NONE && 
             scene->selection.object == closest.object)
         {
@@ -111,10 +110,10 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
             inverted.g = 255 - closest.color.g;
             inverted.b = 255 - closest.color.b;
             
-            if (closest.obj_type == OBJ_PLANE)
+            if (closest.obj_type == OBJ_PLANE || closest.obj_type == OBJ_CYLINDER_CAP)
             {
-                get_plane_uv(closest.point, &u, &v);
-                closest.color = get_checker_color(u, v, closest.color, inverted);
+			    get_plane_uv(closest.point, closest.normal, &u, &v);
+                closest.color = get_checker_color(u / 60, v / 60, closest.color, inverted);
             }
             else if (closest.obj_type == OBJ_SPHERE)
             {

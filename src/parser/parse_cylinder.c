@@ -6,11 +6,12 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 02:06:22 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 12:04:06 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "vector_math.h"
 
 t_parse_status	parse_cylinder(char **split, t_scene *scene)
 {
@@ -28,6 +29,7 @@ t_parse_status	parse_cylinder(char **split, t_scene *scene)
 	if (parse_vector(split[2], &cylinder->axis) == PARSE_ERROR)
 		return (free(cylinder), print_err("Invalid cylinder axis"),
 			PARSE_ERROR);
+	cylinder->axis = vec_normalize(cylinder->axis);
 	if (is_normalized(cylinder->axis) == PARSE_ERROR)
 		return (free(cylinder), print_err("Cylinder axis must be normalized"),
 			PARSE_ERROR);

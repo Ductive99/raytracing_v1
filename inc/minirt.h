@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 12:15:56 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 13:22:01 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <unistd.h>
 
 // Window constants
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 2560
+# define WIN_HEIGHT 1440
 # define WIN_TITLE "miniRT"
 
 // Key codes for Linux
@@ -146,7 +146,7 @@ int				handle_hud_click(int x, int y, t_scene *scene);
 void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
 t_color get_checker_color(double u, double v, t_color c1, t_color c2);
-void get_plane_uv(t_vec3 hit_point, double *u, double *v);
+void get_plane_uv(t_vec3 hit_point, t_vec3 plane_normal, double *u, double *v);
 void get_sphere_uv(t_vec3 normal, double *u, double *v);
 void get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u, double *v);
 

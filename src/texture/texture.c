@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 11:48:57 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/18 21:10:29 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 12:39:00 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,20 @@ t_color get_checker_color(double u, double v, t_color c1, t_color c2)
         return (c2);
 }
 
-void get_plane_uv(t_vec3 hit_point, double *u, double *v)
+void get_plane_uv(t_vec3 hit_point, t_vec3 plane_normal, double *u, double *v)
 {
-    *u = hit_point.x; 
-    *v = hit_point.z;
+    t_vec3 world_up = {0, 1, 0};
+    t_vec3 right;
+    t_vec3 forward;
+    
+    if (fabs(plane_normal.y) > 0.999)
+        world_up = (t_vec3){0, 0, 1};
+    
+    right = vec_normalize(vec_cross(plane_normal, world_up));
+    forward = vec_normalize(vec_cross(right, plane_normal));
+    
+    *u = vec_dot(hit_point, right);
+    *v = vec_dot(hit_point, forward);
 }
 
 void get_sphere_uv(t_vec3 normal, double *u, double *v)
@@ -46,7 +56,6 @@ static void get_cylinder_basis(t_vec3 axis, t_vec3 *right, t_vec3 *forward)
 {
     t_vec3 world_up = {0, 1, 0};
     
-    // Handle gimbal lock: if axis is perfectly vertical, use Z as up
     if (fabs(axis.y) > 0.999)
         world_up = (t_vec3){0, 0, 1};
 
@@ -61,22 +70,27 @@ void get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u, double *v)
     t_vec3  forward;
     double  hit_height;
     double  theta;
+    t_vec3  point_on_axis;
+    t_vec3  radial_vec;
 
     vec_to_point = vec_sub(hit_point, cy->center);
-
+    
     hit_height = vec_dot(vec_to_point, cy->axis);
-
-    *v = (hit_height + (cy->height / 2.0)) / cy->height;
+    
+    *v = hit_height / cy->height;
     
     if (*v < 0.0) *v = 0.0;
     if (*v > 1.0) *v = 1.0;
 
+    point_on_axis = vec_add(cy->center, vec_scale(hit_height, cy->axis));
+    
+    radial_vec = vec_sub(hit_point, point_on_axis);
+    
     get_cylinder_basis(cy->axis, &right, &forward);
 
-    double x_comp = vec_dot(vec_to_point, right);
-    double z_comp = vec_dot(vec_to_point, forward);
+    double x_comp = vec_dot(radial_vec, right);
+    double z_comp = vec_dot(radial_vec, forward);
 
     theta = atan2(z_comp, x_comp);
-
     *u = (theta + M_PI) / (2.0 * M_PI);
 }
