@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 21:12:50 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_scene(t_scene *scene)
 	scene->spheres = NULL;
 	scene->planes = NULL;
 	scene->cylinders = NULL;
+	scene->cones = NULL;
 	scene->selection.type = OBJ_NONE;
 	scene->selection.object = NULL;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
+#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/18 12:16:34 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/19 18:58:56 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES	= main.c \
 		parser/parse_sphere.c \
 		parser/parse_plane.c \
 		parser/parse_cylinder.c \
+		parser/parse_cone.c \
 		parser/parse_color.c \
 		parser/parse_vector.c \
 		math/vector_ops.c \
@@ -35,6 +36,7 @@ SRC_FILES	= main.c \
 		intersect/plane.c \
 		intersect/cylinder.c \
 		intersect/cylinder_caps.c \
+		intersect/cone.c \
 		intersect/trace.c \
 		render/camera.c \
 		render/render.c \
@@ -58,12 +60,22 @@ SRC_FILES	= main.c \
 		utils/linked_list_operations.c \
 		utils/print_error.c \
 		mlx/cleanup.c \
-		mlx/hooks.c \
+		mlx/hooks_keys.c \
+		mlx/hooks_mouse.c \
 		mlx/hud.c \
+		mlx/hud_buttons.c \
+		mlx/hud_click.c \
+		mlx/hud_draw.c \
 		mlx/init_mlx.c \
 		mlx/put_pixel.c \
 		mlx/render.c \
 		transform/transform.c \
+		transform/transform_sphere.c \
+		transform/transform_plane.c \
+		transform/transform_cylinder.c \
+		transform/transform_cone.c \
+		transform/transform_light.c \
+		transform/transform_camera.c \
 		transform/selection.c \
 
 

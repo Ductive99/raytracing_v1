@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 19:58:41 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 20:19:17 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ typedef struct s_selection
 	t_object_type	type;
 	void			*object;
 }					t_selection;
+
+/**
+ * t_rect - Rectangle for drawing
+ */
+typedef struct s_rect
+{
+	int				x;
+	int				y;
+	int				w;
+	int				h;
+}					t_rect;
 
 /**
  * t_button - Interactive button for HUD
@@ -301,6 +312,24 @@ typedef struct s_cylinder
 }					t_cylinder;
 
 /**
+ * t_cone - Cone object (identifier: co)
+ *
+ * @apex: x,y,z coordinates of the cone apex (tip)
+ * @axis: 3D normalized vector of cone axis [-1,1] for each axis
+ * @angle: Half-angle of the cone in degrees
+ * @height: Cone height from apex
+ * @color: RGB color values [0-255]
+ */
+typedef struct s_cone
+{
+	t_point			apex;
+	t_vec3			axis;
+	double			angle;
+	double			height;
+	t_color			color;
+}					t_cone;
+
+/**
  * t_scene - Complete scene structure containing all rendering elements
  *
  * @ambient: Ambient lighting
@@ -319,6 +348,7 @@ typedef struct s_scene
 	t_list			*spheres;
 	t_list			*planes;
 	t_list			*cylinders;
+	t_list			*cones;
 	t_selection		selection;
 }					t_scene;
 
