@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:02:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:27:36 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:42:27 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void	check_cones(t_ray ray, t_scene *scene, t_hit *closest)
 			if (current.t > 0.001 && current.t < closest->t)
 			{
 				*closest = current;
-				closest->obj_type = OBJ_CONE;
+				closest->obj_type = OBJ_PLANE;
 				closest->object = node->obj;
 			}
 		}
