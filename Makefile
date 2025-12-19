@@ -6,7 +6,7 @@
 #    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/19 18:58:56 by abendrih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,12 @@ SRC_FILES	= main.c \
 		mlx/put_pixel.c \
 		mlx/render.c \
 		transform/transform.c \
+		transform/transform_sphere.c \
+		transform/transform_plane.c \
+		transform/transform_cylinder.c \
+		transform/transform_cone.c \
+		transform/transform_light.c \
+		transform/transform_camera.c \
 		transform/selection.c \
 
 

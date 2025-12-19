@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:37:43 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 int	hud_do_move(t_scene *scene, int action)
 {
+	t_vec3	local;
 	t_vec3	delta;
 
-	delta = (t_vec3){0, 0, 0};
+	local = (t_vec3){0, 0, 0};
 	if (action == BTN_MOVE_LEFT)
-		delta.x = -MOVE_SPEED;
+		local.x = -MOVE_SPEED;
 	else if (action == BTN_MOVE_RIGHT)
-		delta.x = MOVE_SPEED;
+		local.x = MOVE_SPEED;
 	else if (action == BTN_MOVE_FWD)
-		delta.z = MOVE_SPEED;
+		local.z = MOVE_SPEED;
 	else if (action == BTN_MOVE_BACK)
-		delta.z = -MOVE_SPEED;
+		local.z = -MOVE_SPEED;
 	else if (action == BTN_MOVE_UP)
-		delta.y = MOVE_SPEED;
+		local.y = MOVE_SPEED;
 	else if (action == BTN_MOVE_DOWN)
-		delta.y = -MOVE_SPEED;
+		local.y = -MOVE_SPEED;
 	else
 		return (0);
+	delta = get_camera_delta(&scene->camera, local);
 	if (scene->selection.type != OBJ_NONE)
 		translate_selection(scene, delta);
 	else

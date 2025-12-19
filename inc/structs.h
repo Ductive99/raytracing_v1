@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:48:53 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ typedef struct s_selection
 	t_object_type	type;
 	void			*object;
 }					t_selection;
+
+/**
+ * t_rect - Rectangle for drawing
+ */
+typedef struct s_rect
+{
+	int				x;
+	int				y;
+	int				w;
+	int				h;
+}					t_rect;
 
 /**
  * t_button - Interactive button for HUD

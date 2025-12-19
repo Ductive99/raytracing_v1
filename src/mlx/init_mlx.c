@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 07:53:02 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:52:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ int	init_mlx(t_mlx *mlx)
 		print_err("Error: Failed to initialize MLX\n");
 		return (1);
 	}
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT,
-			WIN_TITLE);
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, WIN_TITLE);
 	if (!mlx->win_ptr)
 	{
 		print_err("Error: Failed to create window\n");
 		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-		return (1);
+		return (free(mlx->mlx_ptr), 1);
 	}
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->img.img_ptr)
@@ -47,8 +45,7 @@ int	init_mlx(t_mlx *mlx)
 		print_err("Error: Failed to create image\n");
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-		return (1);
+		return (free(mlx->mlx_ptr), 1);
 	}
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr,
 			&mlx->img.bits_per_pixel, &mlx->img.line_len, &mlx->img.endian);

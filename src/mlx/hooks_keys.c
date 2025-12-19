@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:37:43 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 
 static void	handle_move_keys(int keycode, t_scene *scene)
 {
+	t_vec3	local;
 	t_vec3	delta;
 
-	delta = (t_vec3){0, 0, 0};
+	local = (t_vec3){0, 0, 0};
 	if (keycode == KEY_LEFT)
-		delta.x = -MOVE_SPEED;
+		local.x = -MOVE_SPEED;
 	else if (keycode == KEY_RIGHT)
-		delta.x = MOVE_SPEED;
+		local.x = MOVE_SPEED;
 	else if (keycode == KEY_UP)
-		delta.z = MOVE_SPEED;
+		local.z = MOVE_SPEED;
 	else if (keycode == KEY_DOWN)
-		delta.z = -MOVE_SPEED;
+		local.z = -MOVE_SPEED;
 	else if (keycode == KEY_W)
-		delta.y = MOVE_SPEED;
+		local.y = MOVE_SPEED;
 	else if (keycode == KEY_S)
-		delta.y = -MOVE_SPEED;
+		local.y = -MOVE_SPEED;
+	delta = get_camera_delta(&scene->camera, local);
 	if (scene->selection.type != OBJ_NONE)
 		translate_selection(scene, delta);
 	else

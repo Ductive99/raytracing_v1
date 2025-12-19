@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:54:52 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	handle_mouse(int button, int x, int y, t_mlx *mlx)
 			exit(0);
 		}
 		if (hud_result == 1)
-		{
-			render_scene_threaded(scene, mlx);
-			return (0);
-		}
+			return (render_scene_threaded(scene, mlx), 0);
 		select_object(scene, x, y);
 		render_scene_threaded(scene, mlx);
 	}

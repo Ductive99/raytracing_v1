@@ -6,51 +6,56 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:50:43 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud_internal.h"
 
-void	hud_init_button(int idx, int x, int y, int action, char *label)
+static void	hud_init_button(int idx, t_rect pos, int action, char *label)
 {
-	g_buttons[idx].x = x;
-	g_buttons[idx].y = y;
+	g_buttons[idx].x = pos.x;
+	g_buttons[idx].y = pos.y;
 	g_buttons[idx].w = 40;
 	g_buttons[idx].h = 25;
 	g_buttons[idx].action = action;
 	g_buttons[idx].label = label;
 }
 
+static void	hud_init_buttons_move(int bx, int by)
+{
+	hud_init_button(0, (t_rect){bx, by, 0, 0}, BTN_MOVE_LEFT, "<");
+	hud_init_button(1, (t_rect){bx + 50, by, 0, 0}, BTN_MOVE_RIGHT, ">");
+	hud_init_button(2, (t_rect){bx + 110, by, 0, 0}, BTN_MOVE_FWD, "^");
+	hud_init_button(3, (t_rect){bx + 160, by, 0, 0}, BTN_MOVE_BACK, "v");
+	hud_init_button(4, (t_rect){bx + 50, by + 35, 0, 0}, BTN_MOVE_UP, "W");
+	hud_init_button(5, (t_rect){bx + 110, by + 35, 0, 0}, BTN_MOVE_DOWN, "S");
+}
+
+static void	hud_init_buttons_rot(int bx, int by)
+{
+	hud_init_button(6, (t_rect){bx, by, 0, 0}, BTN_ROT_LEFT, "A");
+	hud_init_button(7, (t_rect){bx + 50, by, 0, 0}, BTN_ROT_RIGHT, "D");
+	hud_init_button(8, (t_rect){bx + 110, by, 0, 0}, BTN_ROT_UP, "Q");
+	hud_init_button(9, (t_rect){bx + 160, by, 0, 0}, BTN_ROT_DOWN, "E");
+}
+
 void	hud_init_buttons(void)
 {
 	int	bx;
-	int	by;
 	int	cx;
 
 	bx = HUD_X + 35;
-	by = HUD_Y + 90;
-	hud_init_button(0, bx, by, BTN_MOVE_LEFT, "<");
-	hud_init_button(1, bx + 50, by, BTN_MOVE_RIGHT, ">");
-	hud_init_button(2, bx + 110, by, BTN_MOVE_FWD, "^");
-	hud_init_button(3, bx + 160, by, BTN_MOVE_BACK, "v");
-	by += 35;
-	hud_init_button(4, bx + 50, by, BTN_MOVE_UP, "W");
-	hud_init_button(5, bx + 110, by, BTN_MOVE_DOWN, "S");
-	by = HUD_Y + 200;
-	hud_init_button(6, bx, by, BTN_ROT_LEFT, "A");
-	hud_init_button(7, bx + 50, by, BTN_ROT_RIGHT, "D");
-	hud_init_button(8, bx + 110, by, BTN_ROT_UP, "Q");
-	hud_init_button(9, bx + 160, by, BTN_ROT_DOWN, "E");
-	by = HUD_Y + 290;
-	hud_init_button(10, bx + 50, by, BTN_SIZE_UP, "+");
-	hud_init_button(11, bx + 110, by, BTN_SIZE_DOWN, "-");
 	cx = HUD_X + (HUD_W - 100) / 2;
-	by = HUD_Y + 380;
-	hud_init_button(12, cx, by, BTN_DESELECT, "DESELECT");
+	hud_init_buttons_move(bx, HUD_Y + 90);
+	hud_init_buttons_rot(bx, HUD_Y + 200);
+	hud_init_button(10, (t_rect){bx + 50, HUD_Y + 290, 0, 0}, BTN_SIZE_UP, "+");
+	hud_init_button(11, (t_rect){bx + 110, HUD_Y + 290, 0, 0}, BTN_SIZE_DOWN,
+		"-");
+	hud_init_button(12, (t_rect){cx, HUD_Y + 380, 0, 0}, BTN_DESELECT,
+		"DESELECT");
 	g_buttons[12].w = 100;
-	by = HUD_Y + 420;
-	hud_init_button(13, cx, by, BTN_QUIT, "QUIT");
+	hud_init_button(13, (t_rect){cx, HUD_Y + 420, 0, 0}, BTN_QUIT, "QUIT");
 	g_buttons[13].w = 100;
 }
 
@@ -99,8 +104,9 @@ void	hud_draw_light_buttons(t_mlx *mlx, t_scene *scene)
 		sel = (scene->selection.type == OBJ_LIGHT
 				&& scene->selection.object == lst->obj);
 		if (sel)
-			hud_draw_rect(&mlx->img, g_light_btns[i].x - 2, g_light_btns[i].y
-				- 2, g_light_btns[i].w + 4, g_light_btns[i].h + 4, 0xFFAA00);
+			hud_draw_rect(&mlx->img, (t_rect){g_light_btns[i].x - 2,
+				g_light_btns[i].y - 2, g_light_btns[i].w + 4, g_light_btns[i].h
+				+ 4}, 0xFFAA00);
 		hud_draw_button(mlx, &g_light_btns[i]);
 		num[0] = '1' + i;
 		num[1] = '\0';

@@ -6,46 +6,46 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:27:44 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:48:52 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hud_internal.h"
 
-void	hud_draw_rect(t_img *img, int x, int y, int w, int h, int color)
+void	hud_draw_rect(t_img *img, t_rect r, int color)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < h)
+	while (j < r.h)
 	{
 		i = 0;
-		while (i < w)
+		while (i < r.w)
 		{
-			put_pixel(img, x + i, y + j, color);
+			put_pixel(img, r.x + i, r.y + j, color);
 			i++;
 		}
 		j++;
 	}
 }
 
-void	hud_draw_border(t_img *img, int x, int y, int w, int h, int color)
+void	hud_draw_border(t_img *img, t_rect r, int color)
 {
 	int	i;
 
 	i = 0;
-	while (i < w)
+	while (i < r.w)
 	{
-		put_pixel(img, x + i, y, color);
-		put_pixel(img, x + i, y + h - 1, color);
+		put_pixel(img, r.x + i, r.y, color);
+		put_pixel(img, r.x + i, r.y + r.h - 1, color);
 		i++;
 	}
 	i = 0;
-	while (i < h)
+	while (i < r.h)
 	{
-		put_pixel(img, x, y + i, color);
-		put_pixel(img, x + w - 1, y + i, color);
+		put_pixel(img, r.x, r.y + i, color);
+		put_pixel(img, r.x + r.w - 1, r.y + i, color);
 		i++;
 	}
 }
@@ -66,11 +66,11 @@ void	hud_draw_panel_bg(t_mlx *mlx)
 		}
 		y++;
 	}
-	hud_draw_border(&mlx->img, HUD_X, HUD_Y, HUD_W, HUD_H, 0xFF00FF);
-	hud_draw_border(&mlx->img, HUD_X + 1, HUD_Y + 1, HUD_W - 2, HUD_H - 2,
-		0xCC00CC);
-	hud_draw_border(&mlx->img, HUD_X + 2, HUD_Y + 2, HUD_W - 4, HUD_H - 4,
-		0x660066);
+	hud_draw_border(&mlx->img, (t_rect){HUD_X, HUD_Y, HUD_W, HUD_H}, 0xFF00FF);
+	hud_draw_border(&mlx->img, (t_rect){HUD_X + 1, HUD_Y + 1, HUD_W - 2, HUD_H
+		- 2}, 0xCC00CC);
+	hud_draw_border(&mlx->img, (t_rect){HUD_X + 2, HUD_Y + 2, HUD_W - 4, HUD_H
+		- 4}, 0x660066);
 }
 
 void	hud_draw_section(t_mlx *mlx, int y, char *title)
@@ -88,13 +88,15 @@ void	hud_draw_section(t_mlx *mlx, int y, char *title)
 
 void	hud_draw_button(t_mlx *mlx, t_button *btn)
 {
-	int	bg;
-	int	border;
+	int		bg;
+	int		border;
+	t_rect	r;
 
 	bg = 0x1a0a1a;
 	border = 0xFF00FF;
-	hud_draw_rect(&mlx->img, btn->x, btn->y, btn->w, btn->h, bg);
-	hud_draw_border(&mlx->img, btn->x, btn->y, btn->w, btn->h, border);
-	hud_draw_border(&mlx->img, btn->x + 1, btn->y + 1, btn->w - 2, btn->h - 2,
-		border);
+	r = (t_rect){btn->x, btn->y, btn->w, btn->h};
+	hud_draw_rect(&mlx->img, r, bg);
+	hud_draw_border(&mlx->img, r, border);
+	hud_draw_border(&mlx->img, (t_rect){btn->x + 1, btn->y + 1, btn->w - 2,
+		btn->h - 2}, border);
 }

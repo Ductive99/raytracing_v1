@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:58:56 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,26 @@ int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
 					t_vec3 normal);
 
 // Transform functions
+t_vec3			rotate_vec(t_vec3 v, t_vec3 axis, double angle);
+t_vec3			get_camera_delta(t_cam *cam, t_vec3 local_delta);
 void			translate_selection(t_scene *scene, t_vec3 delta);
-void			translate_camera(t_scene *scene, t_vec3 delta);
 void			rotate_selection(t_scene *scene, t_vec3 axis, double angle);
-void			rotate_camera(t_scene *scene, t_vec3 axis, double angle);
 void			resize_selection(t_scene *scene, double factor);
+
+// Transform - per object
+void			translate_sphere(t_sphere *sp, t_vec3 delta);
+void			resize_sphere(t_sphere *sp, double factor);
+void			translate_plane(t_plan *pl, t_vec3 delta);
+void			rotate_plane(t_plan *pl, t_vec3 axis, double angle);
+void			translate_cylinder(t_cylinder *cy, t_vec3 delta);
+void			rotate_cylinder(t_cylinder *cy, t_vec3 axis, double angle);
+void			resize_cylinder(t_cylinder *cy, double factor);
+void			translate_cone(t_cone *co, t_vec3 delta);
+void			rotate_cone(t_cone *co, t_vec3 axis, double angle);
+void			resize_cone(t_cone *co, double factor);
+void			translate_light(t_light *li, t_vec3 delta);
+void			translate_camera(t_scene *scene, t_vec3 delta);
+void			rotate_camera(t_scene *scene, t_vec3 axis, double angle);
 
 // Render functions
 void			render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
