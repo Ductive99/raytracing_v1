@@ -6,16 +6,33 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 02:06:22 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:20:10 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static t_parse_status	parse_cylinder_data(t_cylinder *cylinder, char **split)
+{
+	char	*endptr;
+
+	cylinder->diameter = ft_strtod(split[3], &endptr);
+	if (*endptr != '\0')
+		return (free(cylinder), print_err("Invalid cylinder diameter format"),
+			PARSE_ERROR);
+	cylinder->height = ft_strtod(split[4], &endptr);
+	if (*endptr != '\0')
+		return (free(cylinder), print_err("Invalid cylinder height format"),
+			PARSE_ERROR);
+	if (cylinder->diameter <= 0.0 || cylinder->height <= 0.0)
+		return (free(cylinder),
+			print_err("Cylinder dimensions must be positive"), PARSE_ERROR);
+	return (PARSE_SUCCESS);
+}
+
 t_parse_status	parse_cylinder(char **split, t_scene *scene)
 {
 	t_cylinder	*cylinder;
-	char		*endptr;
 
 	if (count_split(split) != 6)
 		return (print_err("Invalid cylinder parameters"), PARSE_ERROR);
@@ -31,17 +48,8 @@ t_parse_status	parse_cylinder(char **split, t_scene *scene)
 	if (is_normalized(cylinder->axis) == PARSE_ERROR)
 		return (free(cylinder), print_err("Cylinder axis must be normalized"),
 			PARSE_ERROR);
-	cylinder->diameter = ft_strtod(split[3], &endptr);
-	if (*endptr != '\0')
-		return (free(cylinder), print_err("Invalid cylinder diameter format"),
-			PARSE_ERROR);
-	cylinder->height = ft_strtod(split[4], &endptr);
-	if (*endptr != '\0')
-		return (free(cylinder), print_err("Invalid cylinder height format"),
-			PARSE_ERROR);
-	if (cylinder->diameter <= 0.0 || cylinder->height <= 0.0)
-		return (free(cylinder),
-			print_err("Cylinder dimensions must be positive"), PARSE_ERROR);
+	if (parse_cylinder_data(cylinder, split) == PARSE_ERROR)
+		return (PARSE_ERROR);
 	if (parse_color(split[5], &cylinder->color) == PARSE_ERROR)
 		return (free(cylinder), print_err("Invalid cylinder color"),
 			PARSE_ERROR);

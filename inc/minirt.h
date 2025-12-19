@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:16:44 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../lib/minilibx-linux/mlx.h"
 # include "structs.h"
+# include "parser.h"
 # include <fcntl.h>
+# include <float.h>
 # include <math.h>
 # include <pthread.h>
 # include <stdbool.h>
@@ -62,20 +64,6 @@
 
 // Multi-threading
 # define NUM_THREADS 8
-
-// Parsing
-int				parse_scene(char *filename, t_scene *scene);
-
-t_parse_status	parse_ambient(char **split, t_scene *scene);
-t_parse_status	parse_camera(char **split, t_scene *scene);
-t_parse_status	parse_color(char *str, t_color *color);
-t_parse_status	parse_vector(char *str, t_vec3 *vec);
-t_parse_status	parse_light(char **split, t_scene *scene);
-t_parse_status	parse_plane(char **split, t_scene *scene);
-t_parse_status	parse_sphere(char **split, t_scene *scene);
-t_parse_status	parse_cylinder(char **split, t_scene *scene);
-t_parse_status	parse_cone(char **split, t_scene *scene);
-t_parse_status	is_normalized(t_vec3 v);
 
 // Utils
 
@@ -143,6 +131,12 @@ void			resize_selection(t_scene *scene, double factor);
 void			render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
 void			render_scene_threaded(t_scene *scene, t_mlx *mlx);
 int				handle_keyrelease(int keycode, t_mlx *mlx);
+
+// Intersect
+void	check_cones(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_spheres(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_planes(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest);
 
 // HUD
 void			draw_hud(t_mlx *mlx, t_scene *scene);

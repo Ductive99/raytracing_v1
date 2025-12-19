@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
+#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/19 18:17:18 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,11 @@ SRC_FILES	= main.c \
 		mlx/render.c \
 		transform/transform.c \
 		transform/selection.c \
+		intersect/check_cones.c \
+		intersect/check_cylinders.c \
+		intersect/check_planes.c \
+		intersect/check_spheres.c \
+		intersect/cone_hit.c
 
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))

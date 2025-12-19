@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   check_planes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 10:37:46 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:55:21 by esouhail         ###   ########.fr       */
+/*   Created: 2025/12/19 17:41:23 by esouhail          #+#    #+#             */
+/*   Updated: 2025/12/19 17:42:18 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ray.h"
 
-/**
- * print_err - prints a message to stderr, with formatting (Error: <msg>\n)
- *
- * @msg: message to print
- *
- * Return: 1 always
- */
-int	print_err(char *msg)
+void	check_planes(t_ray ray, t_scene *scene, t_hit *closest)
 {
-	int	ret;
-	
-	ret = write(2, "Error: ", 7);
-	ret = write(2, msg, ft_strlen(msg));
-	ret = write(2, "\n", 1);
-	(void)ret;	
-	return (1);
+	t_list	*node;
+	t_hit	current;
+
+	node = scene->planes;
+	while (node)
+	{
+		if (hit_plane(ray, (t_plan *)node->obj, &current))
+		{
+			if (current.t > 0.001 && current.t < closest->t)
+			{
+				*closest = current;
+				closest->obj_type = OBJ_PLANE;
+				closest->object = node->obj;
+			}
+		}
+		node = node->next;
+	}
 }

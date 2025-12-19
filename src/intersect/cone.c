@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:00:34 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 16:18:01 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:15:09 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ static t_quadratic	get_cone_equation(t_ray ray, t_cone *cone)
 	t_quadratic	q;
 	t_vec3		oc;
 	double		cos2;
-	double		sin2;
 	double		dv;
 	double		ocv;
 
 	oc = vec_sub(ray.origin, cone->apex);
 	cos2 = cos(cone->angle * M_PI / 180.0);
 	cos2 = cos2 * cos2;
-	sin2 = 1.0 - cos2;
 	dv = vec_dot(ray.direction, cone->axis);
 	ocv = vec_dot(oc, cone->axis);
 	q.a = vec_dot(ray.direction, ray.direction) * cos2 - dv * dv;
@@ -139,45 +137,6 @@ bool	hit_cone(t_ray ray, t_cone *cone, t_hit *hit)
 	hit->t = t;
 	hit->point = ray_at(ray, t);
 	hit->normal = get_cone_normal(hit->point, cone);
-	hit->color = cone->color;
-	return (true);
-}
-
-/**
- * hit_cone_cap - Check if a ray intersects with the cone base cap
- * @ray: The ray to test
- * @cone: The cone to test against
- * @hit: Structure to fill with hit information
- *
- * Return: true if hit, false otherwise
- */
-bool	hit_cone_cap(t_ray ray, t_cone *cone, t_hit *hit)
-{
-	t_vec3	base_center;
-	double	denom;
-	double	t;
-	t_vec3	hit_point;
-	double	dist;
-	double	radius;
-
-	base_center = vec_add(cone->apex, vec_scale(cone->height, cone->axis));
-	denom = vec_dot(ray.direction, cone->axis);
-	if (fabs(denom) < EPSILON)
-		return (false);
-	t = vec_dot(vec_sub(base_center, ray.origin), cone->axis) / denom;
-	if (t < EPSILON)
-		return (false);
-	hit_point = ray_at(ray, t);
-	dist = vec_len(vec_sub(hit_point, base_center));
-	radius = cone->height * tan(cone->angle * M_PI / 180.0);
-	if (dist > radius)
-		return (false);
-	hit->hit = true;
-	hit->t = t;
-	hit->point = hit_point;
-	hit->normal = cone->axis;
-	if (denom > 0)
-		hit->normal = vec_scale(-1, hit->normal);
 	hit->color = cone->color;
 	return (true);
 }
