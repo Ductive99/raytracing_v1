@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:05:57 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum e_parse_status
 {
 	PARSE_SUCCESS = 0,
 	PARSE_ERROR = 1
-}					t_parse_status;
+}						t_parse_status;
 
 /**
  * t_object_type - Type of object in scene
@@ -36,7 +36,7 @@ typedef enum e_object_type
 	OBJ_LIGHT,
 	OBJ_CAMERA,
 	OBJ_CONE
-}					t_object_type;
+}						t_object_type;
 
 /**
  * t_selection - Currently selected object for transformation
@@ -46,33 +46,33 @@ typedef enum e_object_type
  */
 typedef struct s_selection
 {
-	t_object_type	type;
-	void			*object;
-}					t_selection;
+	t_object_type		type;
+	void				*object;
+}						t_selection;
 
 /**
  * t_rect - Rectangle for drawing
  */
 typedef struct s_rect
 {
-	int				x;
-	int				y;
-	int				w;
-	int				h;
-}					t_rect;
+	int					x;
+	int					y;
+	int					w;
+	int					h;
+}						t_rect;
 
 /**
  * t_button - Interactive button for HUD
  */
 typedef struct s_button
 {
-	int				x;
-	int				y;
-	int				w;
-	int				h;
-	int				action;
-	char			*label;
-}					t_button;
+	int					x;
+	int					y;
+	int					w;
+	int					h;
+	int					action;
+	char				*label;
+}						t_button;
 
 # define BTN_MOVE_LEFT 1
 # define BTN_MOVE_RIGHT 2
@@ -92,10 +92,13 @@ typedef struct s_button
 # define MAX_LIGHTS 8
 # define NUM_BUTTONS 14
 
-# define HUD_X (WIDTH - 280)
-# define HUD_Y 10
-# define HUD_W 270
-# define HUD_H 560
+enum
+{
+	HUD_X = WIDTH - 280,
+	HUD_Y = 10,
+	HUD_W = 270,
+	HUD_H = 560
+};
 
 /**
  * t_img - Image buffer structure for pixel manipulation
@@ -108,12 +111,12 @@ typedef struct s_button
  */
 typedef struct s_img
 {
-	void			*img_ptr;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_len;
-	int				endian;
-}					t_img;
+	void				*img_ptr;
+	char				*addr;
+	int					bits_per_pixel;
+	int					line_len;
+	int					endian;
+}						t_img;
 
 /**
  * t_hud - HUD state structure
@@ -125,11 +128,11 @@ typedef struct s_img
  */
 typedef struct s_hud
 {
-	t_button		buttons[NUM_BUTTONS];
-	t_button		light_btns[MAX_LIGHTS];
-	int				num_lights;
-	int				initialized;
-}					t_hud;
+	t_button			buttons[NUM_BUTTONS];
+	t_button			light_btns[MAX_LIGHTS];
+	int					num_lights;
+	int					initialized;
+}						t_hud;
 
 /**
  * t_mlx - Main MLX context structure
@@ -142,12 +145,12 @@ typedef struct s_hud
  */
 typedef struct s_mlx
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_img			img;
-	void			*scene;
-	t_hud			hud;
-}					t_mlx;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	void				*scene;
+	t_hud				hud;
+}						t_mlx;
 
 /**
  * t_vec3 - 3D vector/point structure for geometric calculations
@@ -158,13 +161,13 @@ typedef struct s_mlx
  */
 typedef struct s_vec3
 {
-	double			x;
-	double			y;
-	double			z;
-}					t_vec3;
+	double				x;
+	double				y;
+	double				z;
+}						t_vec3;
 
-typedef t_vec3		t_point;
-typedef t_vec3		t_dir;
+typedef t_vec3			t_point;
+typedef t_vec3			t_dir;
 
 /**
  * t_ray - Ray structure for ray tracing
@@ -174,9 +177,9 @@ typedef t_vec3		t_dir;
  */
 typedef struct s_ray
 {
-	t_point			origin;
-	t_dir			direction;
-}					t_ray;
+	t_point				origin;
+	t_dir				direction;
+}						t_ray;
 
 /**
  * t_color - RGB color structure for final pixel values
@@ -187,10 +190,10 @@ typedef struct s_ray
  */
 typedef struct s_color
 {
-	int				r;
-	int				g;
-	int				b;
-}					t_color;
+	int					r;
+	int					g;
+	int					b;
+}						t_color;
 
 /**
  * t_hit - Hit record for ray-object intersections
@@ -205,22 +208,22 @@ typedef struct s_color
  */
 typedef struct s_hit
 {
-	bool			hit;
-	double			t;
-	t_point			point;
-	t_vec3			normal;
-	t_color			color;
-	t_object_type	obj_type;
-	void			*object;
-}					t_hit;
+	bool				hit;
+	double				t;
+	t_point				point;
+	t_vec3				normal;
+	t_color				color;
+	t_object_type		obj_type;
+	void				*object;
+}						t_hit;
 
 typedef struct s_quadratic
 {
-	double			a;
-	double			b;
-	double			c;
-	double			discriminant;
-}					t_quadratic;
+	double				a;
+	double				b;
+	double				c;
+	double				discriminant;
+}						t_quadratic;
 
 /**
  * t_list - Linked list
@@ -230,9 +233,9 @@ typedef struct s_quadratic
  */
 typedef struct s_list
 {
-	void			*obj;
-	struct s_list	*next;
-}					t_list;
+	void				*obj;
+	struct s_list		*next;
+}						t_list;
 
 /**
  * t_ambient - Ambient lighting configuration (identifier: A)
@@ -242,9 +245,9 @@ typedef struct s_list
  */
 typedef struct s_ambient
 {
-	double			ratio;
-	t_color			color;
-}					t_ambient;
+	double				ratio;
+	t_color				color;
+}						t_ambient;
 
 /**
  * t_light - Point light source (identifier: L)
@@ -255,10 +258,10 @@ typedef struct s_ambient
  */
 typedef struct s_light
 {
-	t_point			pos;
-	double			ratio;
-	t_color			color;
-}					t_light;
+	t_point				pos;
+	double				ratio;
+	t_color				color;
+}						t_light;
 
 /**
  * t_cam - Camera configuration (identifier: C)
@@ -274,15 +277,15 @@ typedef struct s_light
  */
 typedef struct s_cam
 {
-	t_point			position;
-	t_vec3			dir;
-	double			fov;
-	t_vec3			viewport_u;
-	t_vec3			viewport_v;
-	t_vec3			viewport_upper_left;
-	t_vec3			pixel_delta_u;
-	t_vec3			pixel_delta_v;
-}					t_cam;
+	t_point				position;
+	t_vec3				dir;
+	double				fov;
+	t_vec3				viewport_u;
+	t_vec3				viewport_v;
+	t_vec3				viewport_upper_left;
+	t_vec3				pixel_delta_u;
+	t_vec3				pixel_delta_v;
+}						t_cam;
 
 /**
  * t_sphere - Sphere object (identifier: sp)
@@ -293,10 +296,10 @@ typedef struct s_cam
  */
 typedef struct s_sphere
 {
-	t_point			center;
-	double			diameter;
-	t_color			color;
-}					t_sphere;
+	t_point				center;
+	double				diameter;
+	t_color				color;
+}						t_sphere;
 
 /**
  * t_plan - Plane object (identifier: pl)
@@ -307,10 +310,10 @@ typedef struct s_sphere
  */
 typedef struct s_plan
 {
-	t_point			point;
-	t_vec3			normal;
-	t_color			color;
-}					t_plan;
+	t_point				point;
+	t_vec3				normal;
+	t_color				color;
+}						t_plan;
 
 /**
  * t_cylinder - Cylinder object (identifier: cy)
@@ -323,12 +326,12 @@ typedef struct s_plan
  */
 typedef struct s_cylinder
 {
-	t_point			center;
-	t_vec3			axis;
-	double			diameter;
-	double			height;
-	t_color			color;
-}					t_cylinder;
+	t_point				center;
+	t_vec3				axis;
+	double				diameter;
+	double				height;
+	t_color				color;
+}						t_cylinder;
 
 /**
  * t_cone - Cone object (identifier: co)
@@ -341,12 +344,12 @@ typedef struct s_cylinder
  */
 typedef struct s_cone
 {
-	t_point			apex;
-	t_vec3			axis;
-	double			angle;
-	double			height;
-	t_color			color;
-}					t_cone;
+	t_point				apex;
+	t_vec3				axis;
+	double				angle;
+	double				height;
+	t_color				color;
+}						t_cone;
 
 /**
  * t_scene - Complete scene structure containing all rendering elements
@@ -361,15 +364,15 @@ typedef struct s_cone
  */
 typedef struct s_scene
 {
-	t_ambient		ambient;
-	t_cam			camera;
-	t_list			*lights;
-	t_list			*spheres;
-	t_list			*planes;
-	t_list			*cylinders;
-	t_list			*cones;
-	t_selection		selection;
-}					t_scene;
+	t_ambient			ambient;
+	t_cam				camera;
+	t_list				*lights;
+	t_list				*spheres;
+	t_list				*planes;
+	t_list				*cylinders;
+	t_list				*cones;
+	t_selection			selection;
+}						t_scene;
 
 /**
  * t_render_task - Thread rendering task structure
@@ -382,12 +385,14 @@ typedef struct s_scene
  */
 typedef struct s_render_task
 {
-	void			*mlx;
-	void			*scene;
-	int				y_start;
-	int				y_end;
-	int				scale;
-}					t_render_task;
+	void				*mlx;
+	void				*scene;
+	int					y_start;
+	int					y_end;
+	int					scale;
+}						t_render_task;
+
+typedef t_parse_status	(*t_parse_func)(char **, t_scene *);
 
 /**
  * t_object_parser - Object parsing structure
@@ -399,9 +404,9 @@ typedef struct s_render_task
  */
 typedef struct s_object_parser
 {
-	const char		*id;
-	int				id_len;
-	t_parse_status	(*parser_func)(char **, t_scene *);
-}					t_object_parser;
+	const char			*id;
+	int					id_len;
+	t_parse_func		parser_func;
+}						t_object_parser;
 
 #endif /* STRUCTS_H */

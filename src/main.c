@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 16:16:29 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:56:59 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,10 @@ int	main(int argc, char **argv)
 	{
 		cleanup_scene(&scene);
 		printf("Error: Failed to parse scene\n");
-		cleanup_scene(&scene);
-		return (1);
+		return (cleanup_scene(&scene), 1);
 	}
 	if (init_mlx(&mlx) != 0)
-	{
-		cleanup_scene(&scene);
-		return (1);
-	}
+		return (cleanup_scene(&scene), 1);
 	mlx.scene = &scene;
 	render_scene(&scene, &mlx);
 	setup_hooks(&mlx);

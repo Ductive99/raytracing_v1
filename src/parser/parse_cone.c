@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 16:15:27 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:32:19 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "vector_math.h"
 
 static t_parse_status	parse_cone_dimensions(char **split, t_cone *cone)
 {
@@ -42,6 +43,7 @@ t_parse_status	parse_cone(char **split, t_scene *scene)
 		return (free(cone), print_err("Invalid cone apex"), PARSE_ERROR);
 	if (parse_vector(split[2], &cone->axis) == PARSE_ERROR)
 		return (free(cone), print_err("Invalid cone axis"), PARSE_ERROR);
+	cone->axis = vec_normalize(cone->axis);
 	if (is_normalized(cone->axis) == PARSE_ERROR)
 		return (free(cone), print_err("Cone axis must be normalized"),
 			PARSE_ERROR);

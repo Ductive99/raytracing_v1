@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 20:38:21 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:40:23 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:04:02 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "structs.h"
+# include "structs.h"
 
 int				parse_scene(char *filename, t_scene *scene);
 

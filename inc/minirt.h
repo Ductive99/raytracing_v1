@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 21:09:34 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:00:28 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define MINIRT_H
 
 # include "../lib/minilibx-linux/mlx.h"
-# include "structs.h"
 # include "parser.h"
+# include "structs.h"
 # include <fcntl.h>
+# include <float.h>
 # include <math.h>
 # include <pthread.h>
 # include <stdbool.h>
@@ -24,8 +25,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <float.h>
-
 
 // Window constants
 # define WIN_WIDTH 2560
@@ -68,84 +67,84 @@
 
 // Utils
 
-size_t			ft_strlen(const char *s);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*get_next_line(int fd);
 
-int				print_err(char *msg);
+int		print_err(char *msg);
 
-int				ft_isspace(int c);
-int				ft_isdigit(int c);
+int		ft_isspace(int c);
+int		ft_isdigit(int c);
 
-void			free_split(char **split);
-char			**ft_split(char const *s, const char *charset);
-void			*ft_memcpy(void *dest, const void *src, size_t n);
-size_t			count_split(char **split);
+void	free_split(char **split);
+char	**ft_split(char const *s, const char *charset);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+size_t	count_split(char **split);
 
-double			ft_strtod(const char *str, char **endptr);
-int				ft_atoi(const char *str);
+double	ft_strtod(const char *str, char **endptr);
+int		ft_atoi(const char *str);
 
-t_list			*ft_lstnew(void *content);
-void			ft_lstadd_back(t_list **lst, t_list *new);
-void			ft_lstclear(t_list **lst, void (*del)(void *));
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 // MLX functions
 
-int				init_mlx(t_mlx *mlx);
-void			cleanup_mlx(t_mlx *mlx);
-void			cleanup_scene(t_scene *scene);
-int				handle_keypress(int keycode, t_mlx *mlx);
-int				handle_close(t_mlx *mlx);
-int				handle_mouse(int button, int x, int y, t_mlx *mlx);
-void			put_pixel(t_img *img, int x, int y, int color);
-int				rgb_to_int(int r, int g, int b);
-void			render_test_pattern(t_mlx *mlx, t_scene *scene);
+int		init_mlx(t_mlx *mlx);
+void	cleanup_mlx(t_mlx *mlx);
+void	cleanup_scene(t_scene *scene);
+int		handle_keypress(int keycode, t_mlx *mlx);
+int		handle_close(t_mlx *mlx);
+int		handle_mouse(int button, int x, int y, t_mlx *mlx);
+void	put_pixel(t_img *img, int x, int y, int color);
+int		rgb_to_int(int r, int g, int b);
+void	render_test_pattern(t_mlx *mlx, t_scene *scene);
 
 // Selection
-void			select_object(t_scene *scene, int x, int y);
-void			deselect_object(t_scene *scene);
+void	select_object(t_scene *scene, int x, int y);
+void	deselect_object(t_scene *scene);
 // t_hit			get_hit_at_pixel(t_scene *scene, int x, int y);
 
-int				clamp(int value);
-t_color			add_colors(t_color c1, t_color c2);
-t_color			scale_color(t_color c, double intensity);
+int		clamp(int value);
+t_color	add_colors(t_color c1, t_color c2);
+t_color	scale_color(t_color c, double intensity);
 t_color	calculate_lighting(t_scene *scene, t_hit hit, t_vec3 ray_dir);
-int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
-					t_vec3 normal);
-t_color			get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal,
-					t_vec3 view_dir);
-int				clamp(int value);
-t_color			add_colors(t_color c1, t_color c2);
-t_color			scale_color(t_color c, double intensity);
-int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
-					t_vec3 normal);
+int		is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
+			t_vec3 normal);
+t_color	get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal,
+			t_vec3 view_dir);
+int		clamp(int value);
+t_color	add_colors(t_color c1, t_color c2);
+t_color	scale_color(t_color c, double intensity);
+int		is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
+			t_vec3 normal);
 
 // Transform functions
-t_vec3			rotate_vec(t_vec3 v, t_vec3 axis, double angle);
-t_vec3			get_camera_delta(t_cam *cam, t_vec3 local_delta);
-void			translate_selection(t_scene *scene, t_vec3 delta);
-void			rotate_selection(t_scene *scene, t_vec3 axis, double angle);
-void			resize_selection(t_scene *scene, double factor);
+t_vec3	rotate_vec(t_vec3 v, t_vec3 axis, double angle);
+t_vec3	get_camera_delta(t_cam *cam, t_vec3 local_delta);
+void	translate_selection(t_scene *scene, t_vec3 delta);
+void	rotate_selection(t_scene *scene, t_vec3 axis, double angle);
+void	resize_selection(t_scene *scene, double factor);
 
 // Transform - per object
-void			translate_sphere(t_sphere *sp, t_vec3 delta);
-void			resize_sphere(t_sphere *sp, double factor);
-void			translate_plane(t_plan *pl, t_vec3 delta);
-void			rotate_plane(t_plan *pl, t_vec3 axis, double angle);
-void			translate_cylinder(t_cylinder *cy, t_vec3 delta);
-void			rotate_cylinder(t_cylinder *cy, t_vec3 axis, double angle);
-void			resize_cylinder(t_cylinder *cy, double factor);
-void			translate_cone(t_cone *co, t_vec3 delta);
-void			rotate_cone(t_cone *co, t_vec3 axis, double angle);
-void			resize_cone(t_cone *co, double factor);
-void			translate_light(t_light *li, t_vec3 delta);
-void			translate_camera(t_scene *scene, t_vec3 delta);
-void			rotate_camera(t_scene *scene, t_vec3 axis, double angle);
+void	translate_sphere(t_sphere *sp, t_vec3 delta);
+void	resize_sphere(t_sphere *sp, double factor);
+void	translate_plane(t_plan *pl, t_vec3 delta);
+void	rotate_plane(t_plan *pl, t_vec3 axis, double angle);
+void	translate_cylinder(t_cylinder *cy, t_vec3 delta);
+void	rotate_cylinder(t_cylinder *cy, t_vec3 axis, double angle);
+void	resize_cylinder(t_cylinder *cy, double factor);
+void	translate_cone(t_cone *co, t_vec3 delta);
+void	rotate_cone(t_cone *co, t_vec3 axis, double angle);
+void	resize_cone(t_cone *co, double factor);
+void	translate_light(t_light *li, t_vec3 delta);
+void	translate_camera(t_scene *scene, t_vec3 delta);
+void	rotate_camera(t_scene *scene, t_vec3 axis, double angle);
 
 // Render functions
-void			render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
-void			render_scene_threaded(t_scene *scene, t_mlx *mlx);
-int				handle_keyrelease(int keycode, t_mlx *mlx);
+void	render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
+void	render_scene_threaded(t_scene *scene, t_mlx *mlx);
+int		handle_keyrelease(int keycode, t_mlx *mlx);
 
 // Intersect
 void	check_cones(t_ray ray, t_scene *scene, t_hit *closest);
@@ -154,16 +153,15 @@ void	check_planes(t_ray ray, t_scene *scene, t_hit *closest);
 void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest);
 
 // HUD
-void			draw_hud(t_mlx *mlx, t_scene *scene);
-int				handle_hud_click(int x, int y, t_mlx *mlx, t_scene *scene);
-void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
+void	draw_hud(t_mlx *mlx, t_scene *scene);
+int		handle_hud_click(int x, int y, t_mlx *mlx, t_scene *scene);
+void	rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
-t_color			get_checker_color(double u, double v, t_color c1, t_color c2);
-void			get_plane_uv(t_vec3 hit_point, t_vec3 plane_normal, double *u, double *v);
-void			get_sphere_uv(t_vec3 normal, double *u, double *v);
-void			get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u,
-					double *v);
-void			get_cone_uv(t_cone *cone, t_vec3 hit_point, double *u,
-					double *v);
+t_color	get_checker_color(double u, double v, t_color c1, t_color c2);
+void	get_plane_uv(t_vec3 hit_point, t_vec3 plane_normal, double *u,
+			double *v);
+void	get_sphere_uv(t_vec3 normal, double *u, double *v);
+void	get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u, double *v);
+void	get_cone_uv(t_cone *cone, t_vec3 hit_point, double *u, double *v);
 
 #endif /* MINIRT_H */
