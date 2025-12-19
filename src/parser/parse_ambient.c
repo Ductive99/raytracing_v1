@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:34:44 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 21:37:07 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:48:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_parse_status	parse_ambient(char **split, t_scene *scene)
 		return (print_err("Ambient ratio must be in [0.0, 1.0]"), PARSE_ERROR);
 	if (parse_color(split[2], &scene->ambient.color) == PARSE_ERROR)
 		return (print_err("Invalid ambient color format"), PARSE_ERROR);
+	scene->has_ambient = 1;
 	return (PARSE_SUCCESS);
 }

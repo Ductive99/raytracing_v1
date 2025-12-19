@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 02:06:27 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:48:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_parse_status	parse_camera(char **split, t_scene *scene)
 		return (print_err("Invalid FOV format"), PARSE_ERROR);
 	if (scene->camera.fov < 0.0 || scene->camera.fov > 180.0)
 		return (print_err("FOV must be in [0, 180]"), PARSE_ERROR);
+	scene->has_camera = 1;
 	return (PARSE_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 02:21:20 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 17:47:04 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:52:24 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ int	parse_scene(char *filename, t_scene *scene)
 		if (!line)
 			break ;
 		if (parse_line(line, scene) == PARSE_ERROR)
-		{
-			free(line);
-			get_next_line(-1);
-			close(fd);
-			return (PARSE_ERROR);
-		}
+			return (free(line), get_next_line(-1), close(fd), PARSE_ERROR);
 		free(line);
 	}
 	get_next_line(-1);
-	return (close(fd), PARSE_SUCCESS);
+	close(fd);
+	if (!scene->has_camera)
+		return (print_err("Missing camera (C) in scene"), PARSE_ERROR);
+	if (!scene->has_ambient)
+		return (print_err("Missing ambient light (A) in scene"), PARSE_ERROR);
+	return (PARSE_SUCCESS);
 }
 
 static t_parse_status	parse_line(char *line, t_scene *scene)

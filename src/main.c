@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 21:56:59 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:48:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_scene(t_scene *scene)
 	scene->cones = NULL;
 	scene->selection.type = OBJ_NONE;
 	scene->selection.object = NULL;
+	scene->has_ambient = 0;
+	scene->has_camera = 0;
 }
 
 /**

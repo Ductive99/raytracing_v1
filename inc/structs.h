@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouhail <esouhail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 22:05:57 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 22:48:21 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,6 +372,8 @@ typedef struct s_scene
 	t_list				*cylinders;
 	t_list				*cones;
 	t_selection			selection;
+	int					has_ambient;
+	int					has_camera;
 }						t_scene;
 
 /**
