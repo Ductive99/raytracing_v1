@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/12 21:32:22 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:47:18 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ static char	*extract_line(char **storage)
 		*storage = temp;
 		return (line);
 	}
-	line = *storage;
-	*storage = NULL;
-	return (line);
+	return (line = *storage, *storage = NULL, line);
 }
 
 /**
@@ -108,10 +106,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (storage)
-		{
-			free(storage);
-			storage = NULL;
-		}
+			return (free(storage), storage = NULL, NULL);
 		return (NULL);
 	}
 	bytes_read = 1;
@@ -119,11 +114,7 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(storage);
-			storage = NULL;
-			return (NULL);
-		}
+			return (free(storage), storage = NULL, (NULL));
 		if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';

@@ -6,7 +6,7 @@
 /*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 03:06:36 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/12 01:11:02 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 21:42:33 by abendrih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ static char	**fill_arr(char **arr, const char *s, const char *charset)
 			i++;
 		word = malloc(i - start + 1);
 		if (!word)
-		{
-			arr[j] = NULL;
-			return (free_split(arr), NULL);
-		}
+			return (arr[j] = NULL, free_split(arr), NULL);
 		ft_memcpy(word, &s[start], i - start);
 		word[i - start] = '\0';
 		arr[j++] = word;
