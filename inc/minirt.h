@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:29:17 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:21:36 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 20:45:41 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../lib/minilibx-linux/mlx.h"
 # include "structs.h"
+# include "parser.h"
 # include <fcntl.h>
 # include <math.h>
 # include <pthread.h>
@@ -23,6 +24,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <float.h>
+
 
 // Window constants
 # define WIN_WIDTH 2560
@@ -62,20 +65,6 @@
 
 // Multi-threading
 # define NUM_THREADS 8
-
-// Parsing
-int				parse_scene(char *filename, t_scene *scene);
-
-t_parse_status	parse_ambient(char **split, t_scene *scene);
-t_parse_status	parse_camera(char **split, t_scene *scene);
-t_parse_status	parse_color(char *str, t_color *color);
-t_parse_status	parse_vector(char *str, t_vec3 *vec);
-t_parse_status	parse_light(char **split, t_scene *scene);
-t_parse_status	parse_plane(char **split, t_scene *scene);
-t_parse_status	parse_sphere(char **split, t_scene *scene);
-t_parse_status	parse_cylinder(char **split, t_scene *scene);
-t_parse_status	parse_cone(char **split, t_scene *scene);
-t_parse_status	is_normalized(t_vec3 v);
 
 // Utils
 
@@ -120,8 +109,7 @@ void			deselect_object(t_scene *scene);
 int				clamp(int value);
 t_color			add_colors(t_color c1, t_color c2);
 t_color			scale_color(t_color c, double intensity);
-t_color			calculate_lighting(t_scene *scene, t_vec3 hit_point,
-					t_vec3 normal, t_color obj_color, t_vec3 ray_dir);
+t_color	calculate_lighting(t_scene *scene, t_hit hit, t_vec3 ray_dir);
 int				is_in_shadow(t_scene *scene, t_light *light, t_vec3 hit_point,
 					t_vec3 normal);
 t_color			get_specular(t_light *light, t_vec3 hit_point, t_vec3 normal,
@@ -159,13 +147,19 @@ void			render_scene_fast(t_scene *scene, t_mlx *mlx, int scale);
 void			render_scene_threaded(t_scene *scene, t_mlx *mlx);
 int				handle_keyrelease(int keycode, t_mlx *mlx);
 
+// Intersect
+void	check_cones(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_spheres(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_planes(t_ray ray, t_scene *scene, t_hit *closest);
+void	check_cylinders(t_ray ray, t_scene *scene, t_hit *closest);
+
 // HUD
 void			draw_hud(t_mlx *mlx, t_scene *scene);
 int				handle_hud_click(int x, int y, t_scene *scene);
 void			rotate_hud(t_scene *scene, t_vec3 axis, double angle);
 
 t_color			get_checker_color(double u, double v, t_color c1, t_color c2);
-void			get_plane_uv(t_vec3 hit_point, double *u, double *v);
+void			get_plane_uv(t_vec3 hit_point, t_vec3 plane_normal, double *u, double *v);
 void			get_sphere_uv(t_vec3 normal, double *u, double *v);
 void			get_cylinder_uv(t_cylinder *cy, t_vec3 hit_point, double *u,
 					double *v);

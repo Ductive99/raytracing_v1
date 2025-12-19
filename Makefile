@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+         #
+#    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 18:58:56 by abendrih         ###   ########.fr        #
+#    Updated: 2025/12/19 20:42:34 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,12 @@ SRC_FILES	= main.c \
 		transform/transform_light.c \
 		transform/transform_camera.c \
 		transform/selection.c \
+		intersect/check_cones.c \
+		intersect/check_cylinders.c \
+		intersect/check_planes.c \
+		intersect/check_spheres.c \
+		intersect/cone_hit.c \
+		texture/object_uv.c
 
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))

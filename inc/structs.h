@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 20:03:07 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:19:17 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 20:29:47 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef enum e_object_type
 	OBJ_CYLINDER,
 	OBJ_CYLINDER_CAP,
 	OBJ_LIGHT,
-	OBJ_CAMERA
+	OBJ_CAMERA,
+	OBJ_CONE
 }					t_object_type;
 
 /**

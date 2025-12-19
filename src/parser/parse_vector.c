@@ -6,7 +6,7 @@
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 03:14:44 by esouhail         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:13:29 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ t_parse_status	parse_vector(char *str, t_vec3 *vec)
 	return (PARSE_SUCCESS);
 }
 
-t_parse_status is_normalized(t_vec3 v)
+t_parse_status	is_normalized(t_vec3 v)
 {
-    float len_squared = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
+	float	len_squared;
 
-    if (fabs(len_squared - 1.0f) < 0.001)
-        return (PARSE_SUCCESS);
-    return (PARSE_ERROR);
+	len_squared = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
+	if (fabs(len_squared - 1.0f) < 0.001)
+		return (PARSE_SUCCESS);
+	return (PARSE_ERROR);
 }

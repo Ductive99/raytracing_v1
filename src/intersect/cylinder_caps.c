@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_caps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 02:29:10 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/18 02:29:27 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 20:37:31 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,33 @@ static double	hit_disk(t_ray ray, t_vec3 center, t_vec3 normal, double radius)
 	return (-1.0);
 }
 
+static void	set_cap_hit(t_hit *hit, t_ray r, double t, t_vec3 normal)
+{
+	hit->hit = true;
+	hit->t = t;
+	hit->point = ray_at(r, t);
+	hit->normal = normal;
+	if (vec_dot(r.direction, hit->normal) > 0)
+		hit->normal = vec_scale(-1.0, hit->normal);
+}
+
 bool	hit_cylinder_caps(t_ray ray, t_cylinder *cyl, t_hit *hit)
 {
 	double	t_bot;
 	double	t_top;
-	double	radius;
-	t_vec3	top_center;
+	double	rad;
+	t_vec3	top;
 
-	radius = cyl->diameter / 2.0;
-	top_center = vec_add(cyl->center, vec_scale(cyl->height, cyl->axis));
-	t_bot = hit_disk(ray, cyl->center, cyl->axis, radius);
-	t_top = hit_disk(ray, top_center, cyl->axis, radius);
+	rad = cyl->diameter / 2.0;
+	top = vec_add(cyl->center, vec_scale(cyl->height, cyl->axis));
+	t_bot = hit_disk(ray, cyl->center, cyl->axis, rad);
+	t_top = hit_disk(ray, top, cyl->axis, rad);
 	hit->hit = false;
 	if (t_bot > EPSILON && (t_bot < t_top || t_top < EPSILON))
-	{
-		hit->hit = true;
-		hit->t = t_bot;
-		hit->point = ray_at(ray, t_bot);
-		hit->normal = vec_scale(-1.0, cyl->axis);
-		if (vec_dot(ray.direction, hit->normal) > 0)
-			hit->normal = cyl->axis;
-		hit->color = cyl->color;
-	}
+		set_cap_hit(hit, ray, t_bot, vec_scale(-1.0, cyl->axis));
 	else if (t_top > EPSILON)
-	{
-		hit->hit = true;
-		hit->t = t_top;
-		hit->point = ray_at(ray, t_top);
-		hit->normal = cyl->axis;
-		if (vec_dot(ray.direction, hit->normal) > 0)
-			hit->normal = vec_scale(-1.0, cyl->axis);
+		set_cap_hit(hit, ray, t_top, cyl->axis);
+	if (hit->hit)
 		hit->color = cyl->color;
-	}
 	return (hit->hit);
 }

@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   check_spheres.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 11:48:57 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 20:41:42 by esouhail         ###   ########.fr       */
+/*   Created: 2025/12/19 17:40:24 by esouhail          #+#    #+#             */
+/*   Updated: 2025/12/19 17:42:06 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "vector_math.h"
+#include "ray.h"
 
-t_color	get_checker_color(double u, double v, t_color c1, t_color c2)
+void	check_spheres(t_ray ray, t_scene *scene, t_hit *closest)
 {
-	double	scale;
-	int		u2;
-	int		v2;
+	t_list	*node;
+	t_hit	current;
 
-	scale = 10.0;
-	u2 = floor(u * scale);
-	v2 = floor(v * scale);
-	if ((u2 + v2) % 2 == 0)
-		return (c1);
-	else
-		return (c2);
+	node = scene->spheres;
+	while (node)
+	{
+		if (hit_sphere(ray, (t_sphere *)node->obj, &current))
+		{
+			if (current.t > 0.001 && current.t < closest->t)
+			{
+				*closest = current;
+				closest->obj_type = OBJ_SPHERE;
+				closest->object = node->obj;
+			}
+		}
+		node = node->next;
+	}
 }

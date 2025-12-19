@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 02:21:20 by esouhail          #+#    #+#             */
-/*   Updated: 2025/12/19 16:18:07 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/19 17:47:04 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <sys/stat.h>
 
 static t_parse_status	parse_line(char *line, t_scene *scene);
 static t_parse_status	parse_object_wrapper(char *line,
 							t_parse_status (*parser_func)(char **, t_scene *),
 							t_scene *scene);
-
-#include <sys/stat.h>
-
-struct stat				st;
 
 /**
  * parse_scene - reads and parses scene file
@@ -30,10 +27,11 @@ struct stat				st;
  */
 int	parse_scene(char *filename, t_scene *scene)
 {
-	int		fd;
-	char	*line;
+	int			fd;
+	char		*line;
+	struct stat	g_st;
 
-	if (stat(filename, &st) == 0 && S_ISDIR(st.st_mode))
+	if (stat(filename, &g_st) == 0 && S_ISDIR(g_st.st_mode))
 		return (print_err("Cannot open directory"), PARSE_ERROR);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -53,16 +51,15 @@ int	parse_scene(char *filename, t_scene *scene)
 		free(line);
 	}
 	get_next_line(-1);
-	close(fd);
-	return (PARSE_SUCCESS);
+	return (close(fd), PARSE_SUCCESS);
 }
 
 static t_parse_status	parse_line(char *line, t_scene *scene)
 {
 	static const t_object_parser	parsers[] = {{"A", 1, parse_ambient}, {"C",
-			1, parse_camera}, {"L", 1, parse_light}, {"sp", 2, parse_sphere},
-			{"pl", 2, parse_plane}, {"cy", 2, parse_cylinder}, {"co", 2,
-			parse_cone}, {NULL, 0, NULL}};
+		1, parse_camera}, {"L", 1, parse_light}, {"sp", 2, parse_sphere},
+	{"pl", 2, parse_plane}, {"cy", 2, parse_cylinder}, {"co", 2,
+		parse_cone}, {NULL, 0, NULL}};
 	int								i;
 
 	if (!line[0] || line[0] == '\n')
