@@ -6,7 +6,7 @@
 #    By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 13:00:00 by esouhail          #+#    #+#              #
-#    Updated: 2025/12/19 21:23:30 by esouhail         ###   ########.fr        #
+#    Updated: 2025/12/19 21:52:10 by esouhail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,8 @@ SRC_FILES	= main.c \
 		texture/plane_uv.c \
 		texture/sphere_uv.c \
 		texture/cylinder_uv.c \
-		texture/cone_uv.c
+		texture/cone_uv.c \
+		light/init_light_ray.c
 
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
