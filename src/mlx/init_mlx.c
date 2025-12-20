@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abendrih <abendrih@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esouhail <souhailelhoussain@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 00:00:00 by abendrih          #+#    #+#             */
-/*   Updated: 2025/12/19 18:52:21 by abendrih         ###   ########.fr       */
+/*   Updated: 2025/12/20 18:18:13 by esouhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int	init_mlx(t_mlx *mlx)
 	}
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr,
 			&mlx->img.bits_per_pixel, &mlx->img.line_len, &mlx->img.endian);
+	mlx->hud.initialized = 0;
 	return (0);
 }
