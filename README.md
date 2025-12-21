@@ -251,9 +251,10 @@ This project taught:
 
 ## 👨‍💻 Authors
 
-**[El Houssain Souhail]** - [@Ductive99](https://github.com/Ductive99)
+**El Houssain Souhail** - [@Ductive99](https://github.com/Ductive99)
 
-**[Anisse Bendrihem]** - [@AnisseBendrihem](https://github.com/AnisseBendrihem)
+**Anisse Bendrihem** - [@AnisseBendrihem](https://github.com/AnisseBendrihem)
+
 ---
 
 **42 School Project** | MiniRT | 2025
