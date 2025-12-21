@@ -2,7 +2,7 @@
 
 A fully functional ray tracer written in C from scratch as part of the 42 curriculum. **MiniRT** renders 3D scenes with realistic lighting, shadows, and interactive object manipulation.
 
-![MiniRT Render](images/Screenshot%20from%202025-12-21%2009-35-44.png)
+![MiniRT Render](images/one-rt.png)
 
 ## ✨ Features
 
@@ -18,7 +18,7 @@ A fully functional ray tracer written in C from scratch as part of the 42 curric
 - **Transform Objects** - Move, rotate, and resize selected objects in real-time
 - **Scene Export** - Print current scene configuration to `.rt` format
 
-![Interactive Editing](images/Screenshot%20from%202025-12-21%2009-36-23.png)
+![Interactive Editing](images/two-rt.png)
 
 ## 🎮 Controls
 
@@ -57,7 +57,7 @@ A fully functional ray tracer written in C from scratch as part of the 42 curric
 - **Thread Pool** - Divide frame into strips for parallel rendering
 - **Key Repeat** - Continuous movement when holding keys
 
-![Complex Scene](images/Screenshot%20from%202025-12-21%2009-37-00.png)
+![Complex Scene](images/planets-rt.png)
 
 ## 🧩 Supported Objects
 
